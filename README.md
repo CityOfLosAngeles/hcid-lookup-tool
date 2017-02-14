@@ -56,8 +56,6 @@ Lookup Tool
 
 ## Data Sources
 
-{{ Which data sources are used }} 
-
 HIMS
 
 BIMS
@@ -76,3 +74,4 @@ Homeownership
 
 Other Non-City Tax Credits and Financed
 
+We've pulled these togehter into a single SQL Server database backup, called `datalake.bak`. The Database name is DataLake. 
