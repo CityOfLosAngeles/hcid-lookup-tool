@@ -40,8 +40,6 @@ Neighborhood Development
 
 ## Goals
 
-{{ Analytics we want to surface, questions to answer }} 
-
 1. Single query of multiple data sources to provide all information on a single (and related) property i.e. Property Information Sheet/Snapshot
 
 2. Minimize need to search using multiple platforms.
@@ -52,7 +50,7 @@ Neighborhood Development
 
 ## Deliverables
 
-Lookup Tool
+Lookup Tool - a website with an automated ETL process on the data exports and a search and lookup functionality. 
 
 ## Data Sources
 
