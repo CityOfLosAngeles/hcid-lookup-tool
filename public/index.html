@@ -1,15 +1,28 @@
 <html>
     <head>
         <script src="./js/papaparse.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
-     
+        <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+        <style>
+            .dropzone {
+                width: 300px;
+                height: 300px;
+                border: 2px dashed #ccc;
+                color: #ccc;
+                line-height: 300px;
+                text-align: center;
+            }
+            .dragover {
+                border-color: red;
+                color: #000;
+            }
+        </style>
     </head>
     <body>
-          
-       
-            <input type="file" id='file'>
-            <button type="submit">Submit</button>
-  
+          <div id="uploads"></div>
+          <div class="dropzone" id="dropzone">Drop Files here to upload</div>
         <script src="./js/index.js"> </script>
     </body>
 
