@@ -1,0 +1,23 @@
+{
+  "name": "hcid-lookup-tool",
+  "version": "0.1.0",
+  "description": "look up tool for several los angeles housing dept databases",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datala/hcid-lookup-tool.git"
+  },
+  "author": "Ryan House, Matt Whitcomb, Andrey Orlov",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/datala/hcid-lookup-tool"
+  },
+  "homepage": "https://github.com/datala/hcid-lookup-tool#readme"
+}

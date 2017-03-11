@@ -90,3 +90,6 @@ ENV/
 
 # Ignore Data 
 data
+
+node_modules
+.DS_Store
