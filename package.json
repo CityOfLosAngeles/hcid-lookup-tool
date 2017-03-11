@@ -19,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/datala/hcid-lookup-tool"
   },
-  "homepage": "https://github.com/datala/hcid-lookup-tool#readme"
+  "homepage": "https://github.com/datala/hcid-lookup-tool#readme",
+  "dependencies": {
+    "busboy": "^0.2.14",
+    "express": "^4.15.2",
+    "fast-csv": "^2.4.0"
+  }
 }
