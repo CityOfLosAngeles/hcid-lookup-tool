@@ -3,14 +3,26 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' })
+
+
+const storage = multer.diskStorage({
+     destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname + '-' + Date.now())
+  }
+})
+
+const upload = multer({storage:storage})
+
 
 router.get('/', (req, res)=>{
 	 res.sendFile(path.join(__dirname, `./public/index.html`))
 })
 
 router.post('/upload', upload.single('file'), (req, res) => {
-	res.send({'done':true});
+	res.status(200).end();
 });
 
 let app = express();
