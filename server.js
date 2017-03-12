@@ -1,54 +1,32 @@
-const Busboy = require('busboy');
+
 const express = require('express');
-const csv = require('fast-csv');
 const router = express.Router();
-const parser = csv();
 const path = require('path');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' })
 
 router.get('/', (req, res)=>{
 	 res.sendFile(path.join(__dirname, `./public/index.html`))
 })
 
-router.post('/upload', (req, res) => {
-	console.info('start post', req.headers);
-	let busboy = new Busboy({
-		headers: req.headers
-	});
-	let result = [];
-	busboy.on('file', (fieldname, file) => {
-		console.info('busboy on file');
-		file.on('readable', () => {
-			console.info('busboy on file, on readable');
-			let data;
-			while ((data = file.read()) !== null) {
-				parser.write(data);
-			}
-		})
-		.on('end', () => {
-			console.info('busboy on file, on end');
-			parser.end();
-		});
-	});
-
-	parser.on('readable', () => {
-		console.info('parser on file, on readable');
-		let data;
-		while ((data = parser.read()) !== null) {
-			//console.log(data);
-			result.push(data);
-		}
-	})
-	.on('end', () => {
-		console.log('done:', result);
-		res.json(result);
-	});
-
-	req.pipe(busboy);
+router.post('/upload', upload.single('file'), (req, res) => {
+	res.send({'done':true});
 });
 
 let app = express();
 
 app.use(router);
+app.use(function(req, res, next){
+    res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
+        console.log('Request has timed out.');
+            res.send(408);
+        });
+
+    next();
+});
+
+
 
 const PORT = process.env.PORT || 6060;
 app.listen(PORT, () => console.log('Server listening on port ' + PORT));
+

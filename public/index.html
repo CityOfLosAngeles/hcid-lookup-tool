@@ -1,10 +1,11 @@
 <html>
-    <head>
-        test form
-    </head>
-    <body>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" accept=".csv"><input type="submit">
-        </form>
-    </body>
+<head>
+
+</head>
+<body>
+<form action="http://localhost:6060/upload" method="post" enctype="multipart/form-data">
+    File <input type="file" name="file" />
+    <input type="submit" value="Submit">
+</form>
+</body>
 </html>
