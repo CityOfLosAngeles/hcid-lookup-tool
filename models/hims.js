@@ -1,10 +1,22 @@
 export default (sequelize, DataTypes) => {
-	var Bims = sequelize.define("Bims", {
-		StatementNum: {
+	var Hims = sequelize.define("Hims", {
+		HOUSEING_PROGRAM: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        StatementDate: {
+        ProjUniqueID: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        ProjectNo: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        PROJECT_STATUS: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        PROJECT_INFO: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
@@ -13,47 +25,71 @@ export default (sequelize, DataTypes) => {
 			allowNull: false,
 			validate: { len: [1] }
 		},
-        Property_Address: {
+        HouseId: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        Property_City_State_Zip: {
+        HouseNum: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        RSO_Exemptions: {
+        HouseFracNum: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        SCEP_Exmpetions: {
+        PIN: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        IS_RSO: {
+        CouncilDistric: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        IS_SCEP: {
+        PreDirCd: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        RSO_Invoice_Num: {
+        StreetName: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        SCEP_Invoice_Num: {
+        StreetTypeCd: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        Total_Units: {
+        PostDirCd: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        RSO_Units_Billed: {
+        UnitRange: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        SCEP_Units_Billed: {
+        Unit_Number: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        ZipCode: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        City: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        LAHD_Count: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        LUPAM_Count: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        IsInFloodZone: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},
+        CensusTract: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
@@ -67,5 +103,5 @@ export default (sequelize, DataTypes) => {
 			timestamps: true
 		}
 	);
-	return Bims;
+	return Hims;
 };

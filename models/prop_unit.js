@@ -1,59 +1,59 @@
 export default (sequelize, DataTypes) => {
-	var Bims = sequelize.define("Bims", {
-		StatementNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        StatementDate: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
+	var Prop_unit = sequelize.define("Prop_unit", {
         APN: {
 			type: DataTypes.STRING,
-			allowNull: false,
+            allowNull: false,
 			validate: { len: [1] }
 		},
-        Property_Address: {
+        UnitID: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        Property_City_State_Zip: {
+		},   
+        BldgID: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        RSO_Exemptions: {
+		},   
+        HouseID: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        SCEP_Exmpetions: {
+		},   
+        BldgUnitID: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        IS_RSO: {
+		},   
+        propbldgid: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        IS_SCEP: {
+		},   
+        LutUnitStatusCd: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        RSO_Invoice_Num: {
+		},   
+        UnitNum: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        SCEP_Invoice_Num: {
+		},   
+        LegacyUnitNum: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        Total_Units: {
+		},   
+        DateBuilt: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        RSO_Units_Billed: {
+		},   
+        DateDemolished: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        SCEP_Units_Billed: {
+		},   
+        LutModReasonCd: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},   
+        LutModVerifiedCd: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},   
+        ModComment: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
@@ -67,5 +67,5 @@ export default (sequelize, DataTypes) => {
 			timestamps: true
 		}
 	);
-	return Bims;
+	return Prop_unit;
 };

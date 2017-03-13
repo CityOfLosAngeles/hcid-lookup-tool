@@ -1,59 +1,55 @@
 export default (sequelize, DataTypes) => {
-	var Bims = sequelize.define("Bims", {
-		StatementNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        StatementDate: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
+	var Rent = sequelize.define("Rent", {
         APN: {
 			type: DataTypes.STRING,
-			allowNull: false,
+            allowNull: false,
 			validate: { len: [1] }
 		},
         Property_Address: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        Property_City_State_Zip: {
+        Service_Date: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        Land_Use_Code: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        Unit_Count: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        Exempted_Units: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        RSO_Units: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        Year_Built: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        Category: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        Council_District: {
+			type: DataTypes.STRING,
+			validate: { len: [1] }
+		},  
+        Secondary_Address: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
-        RSO_Exemptions: {
+        houseID: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
-		},
-        SCEP_Exmpetions: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        IS_RSO: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        IS_SCEP: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        RSO_Invoice_Num: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        SCEP_Invoice_Num: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        Total_Units: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        RSO_Units_Billed: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
-		},
-        SCEP_Units_Billed: {
+		},  
+        FC_NOTES: {
 			type: DataTypes.STRING,
 			validate: { len: [1] }
 		},
@@ -67,5 +63,5 @@ export default (sequelize, DataTypes) => {
 			timestamps: true
 		}
 	);
-	return Bims;
+	return Rent;
 };
