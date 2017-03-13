@@ -60,8 +60,12 @@ export default (sequelize, DataTypes) => {
             defaultValue: true
 		}
 	},{
-			timestamps: true
-		}
-	);
+            classMethods: {
+            associate: (models) => {
+                Rent.belongsTo(models.AddressMaster);
+            }
+        },
+        timestamps: false
+    });
 	return Rent;
 };

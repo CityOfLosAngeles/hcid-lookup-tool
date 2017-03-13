@@ -64,8 +64,12 @@ export default (sequelize, DataTypes) => {
             defaultValue: true
 		}
 	},{
-			timestamps: true
-		}
-	);
+            classMethods: {
+            associate: (models) => {
+                Prop_unit.belongsTo(models.AddressMaster);
+            }
+        },
+        timestamps: false
+    });
 	return Prop_unit;
 };

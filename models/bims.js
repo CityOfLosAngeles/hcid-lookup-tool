@@ -64,8 +64,12 @@ export default (sequelize, DataTypes) => {
             defaultValue: true
 		}
 	},{
-			timestamps: true
-		}
-	);
+            classMethods: {
+            associate: (models) => {
+                Bims.belongsTo(models.AddressMaster);
+            }
+        },
+        timestamps: false
+    });
 	return Bims;
 };

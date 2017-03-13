@@ -100,8 +100,12 @@ export default (sequelize, DataTypes) => {
             defaultValue: true
 		}
 	},{
-			timestamps: true
-		}
-	);
+            classMethods: {
+            associate: (models) => {
+                Hims.belongsTo(models.AddressMaster);
+            }
+        },
+        timestamps: false
+    });
 	return Hims;
 };
