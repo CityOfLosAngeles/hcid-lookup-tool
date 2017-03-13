@@ -112,6 +112,10 @@ CREATE TABLE prop_site_address (
     HseFlgDeleted CHAR(40),
     ApnFlgDeleted CHAR(40)
 );
+-- ** ISSUES with PROP SITE ADDRESS ** --
+-- @ find: 5581004021 - had to delete single quotes around "1-50"
+-- @ find: 6011002034 - had to delete single quotes around "1-12"
+
 
 CREATE TABLE prop_unit (
     APN CHAR(40) NOT NULL,
