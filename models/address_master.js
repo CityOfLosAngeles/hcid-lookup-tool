@@ -48,8 +48,17 @@ module.exports = function(sequelize, DataTypes){
 		}
 		
 	},{
-			timestamps: true
-		}
-	);
+        classMethods: {
+            associate: (models) => {
+                AddressMaster.hasMany(models.Bims),
+                AddressMaster.hasMany(models.Hims),
+                AddressMaster.hasMany(models.Prop_site_address),
+                AddressMaster.hasMany(models.Prop_unit),
+                AddressMaster.hasMany(models.Rent),
+                AddressMaster.hasMany(models.Scep)
+            }
+        },
+        timestamps: true
+    });
 		return AddressMaster;
 };
