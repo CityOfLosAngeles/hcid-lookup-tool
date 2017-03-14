@@ -35,7 +35,7 @@ module.exports = {
         }
 
         runConstructor = (r) => {
-            var tempRow = new Row(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10], r[11], r[12], r[13]);
+            var tempRow = new Row(...r);
             batch.push(tempRow);
         }
 
@@ -49,7 +49,7 @@ module.exports = {
         });
 
         parser.on('error', () => {
-            console.log('Error');
+            console.error;
         });
 
         parser.on('finish', done);

@@ -30,12 +30,12 @@ router.get('/', (req, res) => {
 
 router.post('/upload', upload.single('file'), (req, res) => {
     watchFolder();
-	res.status(200).redirect('/');
+	res.status(301).redirect('/');
 });
 
 router.get('/test', (req,res) => {
     require('./controllers/bims_controller.js').readData(app);
-    res.status(200).redirect('/');
+    res.status(301).redirect('/');
 });
 
 let app = express();
