@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
          cb(null, `uploads`)
     },
     filename: function (req, file, cb) {
-        cb(null, `${file.originalname} - ${Date.now()}`)
+        cb(null, `${file.originalname}-${Date.now()}`)
      }
 })
 
@@ -27,6 +27,7 @@ router.get(`/`, (req, res)=>{
 })
 
 router.post(`/upload`, upload.single(`file`), (req, res) => {
+    watchFolder();
 	res.status(200).redirect(`/`);
 });
 
@@ -49,7 +50,28 @@ db.sequelize.sync().then(()=> {
 });
 
 
-fs.watch(`./uploads`, (eventType, filename) => {
-  if (filename)
-    console.log(eventType, filename);
-});
+watchFolder = ()=>{
+    fs.watch(`./uploads`, (eventType, filename) => {
+        if (filename){
+            console.log(eventType, filename);
+            copyToTemp(filename);
+        }
+        if(!filename){
+            return
+        }
+    });
+}
+
+copyToTemp = (src)=>{
+    let readStream = fs.createReadStream(`./uploads/${src}`);
+
+    readStream.once('error', (err) => {
+        console.log(err);
+    });
+
+    readStream.once('end', () => {
+        console.log('done copying');
+    });
+    
+    readStream.pipe(fs.createWriteStream(`./temp-data/${src}`));
+}

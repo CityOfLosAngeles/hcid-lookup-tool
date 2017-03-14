@@ -91,6 +91,7 @@ ENV/
 # Ignore Data 
 data
 
+temp-data
 uploads
 node_modules
 .DS_Store
