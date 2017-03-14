@@ -55,5 +55,4 @@ module.exports = {
         parser.on('finish', done);
         stream.pipe(parser);
     }
-
 }
