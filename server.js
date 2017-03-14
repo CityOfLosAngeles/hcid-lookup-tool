@@ -33,6 +33,11 @@ router.post('/upload', upload.single('file'), (req, res) => {
 	res.status(200).redirect('/');
 });
 
+router.get('/test', (req,res) => {
+    require('./controllers/bims_controller.js')(app);
+    res.status(200).redirect('/');
+});
+
 let app = express();
 
 app.use(router);
