@@ -4,6 +4,10 @@ const router = express.Router();
 const path = require(`path`);
 const fs = require(`fs`);
 const multer = require(`multer`);
+const db = require("./models");
+
+const PORT = process.env.PORT || 6060;
+
 
 // ************** MULTER CONFIG ****************** // 
 const storage = multer.diskStorage({
@@ -38,10 +42,11 @@ app.use(function(req, res, next){
     next();
 });
 
-
-
-const PORT = process.env.PORT || 6060;
-app.listen(PORT, () => console.log(`Server listening on port ` + PORT));
+db.sequelize.sync().then(()=> {
+    app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+    });
+});
 
 
 fs.watch(`./uploads`, (eventType, filename) => {

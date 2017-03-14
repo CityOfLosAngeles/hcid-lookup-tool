@@ -58,7 +58,8 @@ module.exports = function(sequelize, DataTypes){
                 AddressMaster.hasMany(models.Scep)
             }
         },
-        timestamps: true
+        timestamps: true,
+		freezeTableName: true
     });
 		return AddressMaster;
 };

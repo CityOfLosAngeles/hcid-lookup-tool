@@ -1,102 +1,77 @@
-export default (sequelize, DataTypes) => {
+module.exports = function(sequelize, DataTypes) {
 	var Hims = sequelize.define("Hims", {
-		HOUSEING_PROGRAM: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+		HOUSING_PROGRAM: {
+			type: DataTypes.STRING
 		},
         ProjUniqueID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         ProjectNo: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         PROJECT_STATUS: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         PROJECT_INFO: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         APN: {
 			type: DataTypes.STRING,
-			allowNull: false,
-			validate: { len: [1] }
+			allowNull: false
 		},
         HouseId: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         HouseNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         HouseFracNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         PIN: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         CouncilDistric: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         PreDirCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         StreetName: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         StreetTypeCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         PostDirCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         UnitRange: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         Unit_Number: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         ZipCode: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         City: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         LAHD_Count: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         LUPAM_Count: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         IsInFloodZone: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         CensusTract: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         is_active: {
 			type: DataTypes.BOOLEAN,
-			allowNull: false,
-			validate: { len: [1] },
             defaultValue: true
 		}
 	},{
@@ -105,7 +80,8 @@ export default (sequelize, DataTypes) => {
                 Hims.belongsTo(models.AddressMaster);
             }
         },
-        timestamps: false
+        timestamps: false,
+		freezeTableName: true
     });
 	return Hims;
 };

@@ -1,62 +1,47 @@
-export default (sequelize, DataTypes) => {
+module.exports = function(sequelize, DataTypes) {
 	var Rent = sequelize.define("Rent", {
         APN: {
 			type: DataTypes.STRING,
-            allowNull: false,
-			validate: { len: [1] }
+            allowNull: false
 		},
         Property_Address: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         Service_Date: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Land_Use_Code: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Unit_Count: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Exempted_Units: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         RSO_Units: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Year_Built: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Category: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Council_District: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Secondary_Address: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         houseID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         FC_NOTES: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         is_active: {
 			type: DataTypes.BOOLEAN,
-			allowNull: false,
-			validate: { len: [1] },
             defaultValue: true
 		}
 	},{
@@ -65,7 +50,8 @@ export default (sequelize, DataTypes) => {
                 Rent.belongsTo(models.AddressMaster);
             }
         },
-        timestamps: false
+        timestamps: false,
+		freezeTableName: true
     });
 	return Rent;
 };

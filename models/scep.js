@@ -1,74 +1,56 @@
-export default (sequelize, DataTypes) => {
+module.exports = function(sequelize, DataTypes) {
 	var Scep = sequelize.define("Scep", {
         propID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         PermExemptions: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         TotalExemptions: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         councilDistrictNo: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         censusTract: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         yearBuilt: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         units: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         APN: {
 			type: DataTypes.STRING,
-            allowNull: false,
-			validate: { len: [1] }
+            allowNull: false
 		},
         landUseDesc: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CodeDistrict: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CodeDistrictID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         HouseNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         StreetName: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Property_Address: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         StreetDirection: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         FlgDeleted: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         is_active: {
 			type: DataTypes.BOOLEAN,
-			allowNull: false,
-			validate: { len: [1] },
             defaultValue: true
 		}	
 	},{
@@ -77,7 +59,8 @@ export default (sequelize, DataTypes) => {
                 Scep.belongsTo(models.AddressMaster);
             }
         },
-        timestamps: false
+        timestamps: false,
+		freezeTableName: true
     });
 	return Scep;
 };
