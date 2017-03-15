@@ -1,202 +1,152 @@
 export default (sequelize, DataTypes) => {
-	var Prop_site_address = sequelize.define("Prop_site_address", {
+	let Prop_site_address = sequelize.define("Prop_site_address", {
 		Apn: {
 			type: DataTypes.STRING,
-            allowNull: false,
-			validate: { len: [1] }
+            allowNull: false
 		},
         HouseID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         HouseID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Pin: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         HouseNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         HouseFracNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         PreDirCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         StreetName: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         StreetTypeCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         PostDirCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         UnitRange: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         City: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Zip: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         ZipSuffix: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         XCoord: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         YCoord: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Lon: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Lat: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         Pind: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         EngDist: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CouncilDistrict: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         LupLandUseCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         FlgHistMonument: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         LutCodeOfficeCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         LutRentAreaCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         LutHistPresZoneCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         TbmPage: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         TbmRow: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         TbmCol: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CenTract2010: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CenBlock2010GeoID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CenBlock2010: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CenBlockGrp2010: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CommunityName: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         FlgInsideCoi: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CraRedevCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         StateAssemDist: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         StateSenDist: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         UsCongDist: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CountySupDistNum: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         CommunityPlanAreaID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         NeighborhoodCouncilID: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         FlgNsp1: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         FlgNsp2: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         FlgNsp3: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         HseAssignedCd: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         HseFlgDeleted: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         ApnFlgDeleted: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},
         is_active: {
 			type: DataTypes.BOOLEAN,
-			allowNull: false,
-			validate: { len: [1] },
             defaultValue: true
 		}
 	},{
@@ -205,7 +155,8 @@ export default (sequelize, DataTypes) => {
                 Prop_site_address.belongsTo(models.AddressMaster);
             }
         },
-        timestamps: false
+        timestamps: false,
+		freezeTableName: true
     });
 	return Prop_site_address;
 };    

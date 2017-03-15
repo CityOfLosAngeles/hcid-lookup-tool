@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes){
-	var AddressMaster = sequelize.define("AddressMaster", {
+export default (sequelize, DataTypes) => {
+	let AddressMaster = sequelize.define("AddressMaster", {
 		street_num: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -58,7 +58,8 @@ module.exports = function(sequelize, DataTypes){
                 AddressMaster.hasMany(models.Scep)
             }
         },
-        timestamps: true
+        timestamps: true,
+		freezeTableName: true
     });
 		return AddressMaster;
 };
