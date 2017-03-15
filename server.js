@@ -15,7 +15,8 @@ const storage = multer.diskStorage({
         cb(null, 'uploads')
     },
     filename: function (req, file, cb) {
-        cb(null, `${file.originalname}-${Date.now()}`)
+        let name = file.originalname.split('.');
+        cb(null, `${name[0]}-${Date.now()}.${name[1]}`);
     }
 });
 
@@ -77,8 +78,25 @@ let watchFolder = () => {
     });
 }
 
-let copyToTemp = (src) => {
-    let readStream = fs.createReadStream(`./uploads/${src}`);
+let copyToTemp = (fileName) => {
+    let readStream = fs.createReadStream(`./uploads/${fileName}`);
+    let tempName = '';
+
+    if(fileName.includes('bims')){
+        tempName = 'bims.csv';
+    } else if (fileName.includes('hims')){
+        tempName = 'hims.csv';
+    } else if (fileName.includes('site')){
+        tempName = 'prop_site_address.csv';
+    } else if (fileName.includes('unit')){
+        tempName = 'prop_unit.csv';
+    } else if (fileName.includes('rent')){
+        tempName = 'rent.csv';
+    } else if (fileName.includes('scep')){
+        tempName = 'scep.csv';
+    } else {
+        return;
+    }
 
     readStream.once('error', (err) => {
         console.log(err);
@@ -88,5 +106,5 @@ let copyToTemp = (src) => {
         console.log('done copying');
     });
     
-    readStream.pipe(fs.createWriteStream(`./temp-data/${src}`));
+    readStream.pipe(fs.createWriteStream(`./temp-data/${tempName}`));
 }

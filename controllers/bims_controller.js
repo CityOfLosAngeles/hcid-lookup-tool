@@ -5,7 +5,7 @@ let parser = csv();
 
 module.exports = {
     readData: (app) => {
-        let stream = fs.createReadStream("./temp-data/bims_iter2.csv-1489547421229");
+        let stream = fs.createReadStream("./temp-data/bims.csv");
         let i = 0;
         let num = 1000;
         let batch = [];
