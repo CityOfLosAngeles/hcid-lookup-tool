@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-	var Prop_unit = sequelize.define("Prop_unit", {
+export default (sequelize, DataTypes) => {
+	let Prop_unit = sequelize.define("Prop_unit", {
         APN: {
 			type: DataTypes.STRING,
             allowNull: false

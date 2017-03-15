@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+export default (sequelize, DataTypes) => {
     var Bims = sequelize.define("Bims", {
         StatementNum: {
             type: DataTypes.STRING

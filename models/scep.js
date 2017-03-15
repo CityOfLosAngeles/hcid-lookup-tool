@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-	var Scep = sequelize.define("Scep", {
+export default (sequelize, DataTypes) => {
+	let Scep = sequelize.define("Scep", {
         propID: {
 			type: DataTypes.STRING
 		},  

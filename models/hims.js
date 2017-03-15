@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-	var Hims = sequelize.define("Hims", {
+export default (sequelize, DataTypes) => {
+	let Hims = sequelize.define("Hims", {
 		HOUSING_PROGRAM: {
 			type: DataTypes.STRING
 		},

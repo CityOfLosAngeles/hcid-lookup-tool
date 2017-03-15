@@ -1,11 +1,11 @@
-let fs = require('fs'),
-    csv = require("csv-parse");
+import fs from 'fs';
+import csv from 'csv-parse';
 
 let parser = csv();
 
 module.exports = {
     readData: (app) => {
-        let stream = fs.createReadStream("./temp-data/bims_iter2.csv-1489463580578");
+        let stream = fs.createReadStream("./temp-data/bims_iter2.csv-1489547421229");
         let i = 0;
         let num = 1000;
         let batch = [];
@@ -27,14 +27,13 @@ module.exports = {
             this.SCEP_Units_Billed = c14;
         }
      
-        done = () => {
-            console.log(batch);
+        let done = () => {
             stream.unpipe(parser);
             parser.end();
             stream.destroy();
         }
 
-        runConstructor = (r) => {
+        let runConstructor = (r) => {
             var tempRow = new Row(...r);
             batch.push(tempRow);
         }

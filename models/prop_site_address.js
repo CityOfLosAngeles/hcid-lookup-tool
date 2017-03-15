@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-	var Prop_site_address = sequelize.define("Prop_site_address", {
+export default (sequelize, DataTypes) => {
+	let Prop_site_address = sequelize.define("Prop_site_address", {
 		Apn: {
 			type: DataTypes.STRING,
             allowNull: false
@@ -41,8 +41,7 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING
 		},  
         ZipSuffix: {
-			type: DataTypes.STRING,
-			validate: { len: [1] }
+			type: DataTypes.STRING
 		},  
         XCoord: {
 			type: DataTypes.STRING

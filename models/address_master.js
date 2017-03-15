@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes){
-	var AddressMaster = sequelize.define("AddressMaster", {
+export default (sequelize, DataTypes) => {
+	let AddressMaster = sequelize.define("AddressMaster", {
 		street_num: {
 			type: DataTypes.INTEGER,
 			allowNull: false,

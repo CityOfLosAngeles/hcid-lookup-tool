@@ -2,7 +2,7 @@
     "development": {
         "username": null,
         "password": null,
-        "database": null,
+        "database": "hcid-db",
         "dialect": "postgres",
         "protocol": "postgres",
         "port": 5432,

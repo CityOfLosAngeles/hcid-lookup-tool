@@ -1,10 +1,10 @@
 
-const express = require('express');
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import multer from 'multer';
+import db from './models';
 const router = express.Router();
-const path = require('path');
-const fs = require('fs');
-const multer = require('multer');
-const db = require('./models');
 
 const PORT = process.env.PORT || 6060;
 
@@ -59,13 +59,13 @@ db.sequelize.sync().then(() => {
 
 // Functions Section
 
-checkFolder = (folderName) => {
+let checkFolder = (folderName) => {
     if (!fs.existsSync(`./${folderName}`)){
         fs.mkdirSync(`./${folderName}`);
     }
 }
 
-watchFolder = () => {
+let watchFolder = () => {
     fs.watch('./uploads', (eventType, filename) => {
         if (filename){
             console.log(eventType, filename);
@@ -77,7 +77,7 @@ watchFolder = () => {
     });
 }
 
-copyToTemp = (src) => {
+let copyToTemp = (src) => {
     let readStream = fs.createReadStream(`./uploads/${src}`);
 
     readStream.once('error', (err) => {

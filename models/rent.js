@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-	var Rent = sequelize.define("Rent", {
+export default (sequelize, DataTypes) => {
+	let Rent = sequelize.define("Rent", {
         APN: {
 			type: DataTypes.STRING,
             allowNull: false
