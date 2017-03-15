@@ -33,27 +33,27 @@ module.exports = {
             stream.destroy();
         }
 
-        let runConstructor = (r) => {
-            // console.log(stream.read());
-            while(batch.length < 1000){
-                let tempRow = new Row(...r);
+        let runConstructor = (readableStream) => {
+            while(batch.length < num){
+                let tempRow = new Row(...readableStream);
                 batch.push(tempRow);
                 console.log(`***\nBatch Length: ${batch.length}`);
             }
-            if( batch.length > 999){
+            if( batch.length > (num-1) ){
                 // if(stream.read() == null) { console.log('stream.read() is null');}
                 console.log('End of while loop, starting address check and batch deletion');
                 stream.pause();
                 i++;
                 console.log(`batch count: ${i}`);
                 checkAddressList();
-                batch = [];
+                
             }
         }
 
         let checkAddressList = () => {
             console.log('inside master address check function');
-            stream.resume();
+            batch = [];
+            return stream.resume();
         }
 
         parser.on('readable', () => {
