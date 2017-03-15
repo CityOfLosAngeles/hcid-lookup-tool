@@ -34,17 +34,30 @@ module.exports = {
         }
 
         let runConstructor = (r) => {
-            var tempRow = new Row(...r);
-            batch.push(tempRow);
+            // console.log(stream.read());
+            while(batch.length < 1000){
+                let tempRow = new Row(...r);
+                batch.push(tempRow);
+                console.log(`***\nBatch Length: ${batch.length}`);
+            }
+            if( batch.length > 999){
+                // if(stream.read() == null) { console.log('stream.read() is null');}
+                console.log('End of while loop, starting address check and batch deletion');
+                stream.pause();
+                i++;
+                console.log(`batch count: ${i}`);
+                checkAddressList();
+                batch = [];
+            }
+        }
+
+        let checkAddressList = () => {
+            console.log('inside master address check function');
+            stream.resume();
         }
 
         parser.on('readable', () => {
-            if (i <= num) {
-                runConstructor(parser.read());
-                i++;
-            } else {
-                done();
-            }
+            runConstructor(parser.read());        
         });
 
         parser.on('error', () => {
