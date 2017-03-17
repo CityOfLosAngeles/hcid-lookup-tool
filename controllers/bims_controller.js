@@ -1,7 +1,6 @@
 import fs from 'fs';
-import csv from 'csv-parse';
+import csv from 'fast-csv';
 
-let parser = csv();
 
 module.exports = {
     readData: (app) => {
@@ -26,45 +25,26 @@ module.exports = {
             this.RSO_Units_Billed = c13;
             this.SCEP_Units_Billed = c14;
         }
-     
-        let done = () => {
-            stream.unpipe(parser);
-            parser.end();
-            stream.destroy();
-        }
+
+        let csvStream = csv({quote: null})
+            .on("data", function(data){
+                i++
+                console.log(`----------${i}-----------------`);
+                runConstructor(data);
+            })
+            .on("end", function(){
+                console.log("done");
+            });
+
 
         let runConstructor = (readableStream) => {
-            while(batch.length < num){
-                let tempRow = new Row(...readableStream);
-                batch.push(tempRow);
-                console.log(`***\nBatch Length: ${batch.length}`);
-            }
-            if( batch.length > (num-1) ){
-                // if(stream.read() == null) { console.log('stream.read() is null');}
-                console.log('End of while loop, starting address check and batch deletion');
-                stream.pause();
-                i++;
-                console.log(`batch count: ${i}`);
-                checkAddressList();
-                
-            }
+            let tempRow = new Row(...readableStream);
+            // batch.push(tempRow);
+            console.log(tempRow);
+            return;
         }
 
-        let checkAddressList = () => {
-            console.log('inside master address check function');
-            batch = [];
-            return stream.resume();
-        }
-
-        parser.on('readable', () => {
-            runConstructor(parser.read());        
-        });
-
-        parser.on('error', () => {
-            console.error;
-        });
-
-        parser.on('finish', done);
-        stream.pipe(parser);
+        stream.pipe(csvStream);
     }
 }
+
