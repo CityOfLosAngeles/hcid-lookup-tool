@@ -6,7 +6,7 @@ import multer from 'multer';
 import db from './models';
 const router = express.Router();
 
-const PORT = process.env.PORT || 6060;
+const PORT = process.env.PORT || 6080;
 
 
 // ************** MULTER CONFIG ****************** // 
