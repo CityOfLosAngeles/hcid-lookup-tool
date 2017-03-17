@@ -1,7 +1,10 @@
 import fs from 'fs';
-import csv from 'csv-parse';
+import csv from 'fast-csv';
 
+<<<<<<< HEAD
 let parser = csv({separator:',', quote: '"'});
+=======
+>>>>>>> 3a0a5b3bceb11b8d395ca64c2af13033eee098ca
 
 module.exports = {
     readData: (app) => {
@@ -26,6 +29,7 @@ module.exports = {
             this.RSO_Units_Billed = c13;
             this.SCEP_Units_Billed = c14;
         }
+<<<<<<< HEAD
      
         let done = () => {
             stream.unpipe(parser);
@@ -59,12 +63,28 @@ module.exports = {
         parser.on('readable', () => {
             console.log(parser.read());        
         });
+=======
 
-        parser.on('error', () => {
-            console.error;
-        });
+        let csvStream = csv({quote: null})
+            .on("data", function(data){
+                i++
+                console.log(`----------${i}-----------------`);
+                runConstructor(data);
+            })
+            .on("end", function(){
+                console.log("done");
+            });
 
-        parser.on('finish', done);
-        stream.pipe(parser);
+>>>>>>> 3a0a5b3bceb11b8d395ca64c2af13033eee098ca
+
+        let runConstructor = (readableStream) => {
+            let tempRow = new Row(...readableStream);
+            // batch.push(tempRow);
+            console.log(tempRow);
+            return;
+        }
+
+        stream.pipe(csvStream);
     }
 }
+
