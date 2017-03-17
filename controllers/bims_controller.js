@@ -1,11 +1,6 @@
 import fs from 'fs';
 import csv from 'fast-csv';
 
-<<<<<<< HEAD
-let parser = csv({separator:',', quote: '"'});
-=======
->>>>>>> 3a0a5b3bceb11b8d395ca64c2af13033eee098ca
-
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
@@ -28,42 +23,6 @@ module.exports = {
             this.RSO_Units_Billed = c13;
             this.SCEP_Units_Billed = c14;
         }
-<<<<<<< HEAD
-     
-        let done = () => {
-            stream.unpipe(parser);
-            parser.end();
-            stream.destroy();
-        }
-
-        // let runConstructor = (readableStream) => {
-        //     while(batch.length < num){
-        //         let tempRow = new Row(...readableStream);
-        //         batch.push(tempRow);
-        //         console.log(`***\nBatch Length: ${batch.length}`);
-        //     }
-        //     if( batch.length > (num-1) ){
-        //         // if(stream.read() == null) { console.log('stream.read() is null');}
-        //         console.log('End of while loop, starting address check and batch deletion');
-        //         stream.pause();
-        //         i++;
-        //         console.log(`batch count: ${i}`);
-        //         checkAddressList();
-                
-        //     }
-        // }
-
-        // let checkAddressList = () => {
-        //     console.log('inside master address check function');
-        //     batch = [];
-        //     return stream.resume();
-        // }
-
-        parser.on('readable', () => {
-            console.log(parser.read());        
-        });
-=======
-
         let csvStream = csv({quote: null})
             .on("data", function(data){
                 runConstructor(data);
@@ -72,8 +31,6 @@ module.exports = {
                 // Last batch DB function goes here
                 console.log("done");
             });
-
->>>>>>> 3a0a5b3bceb11b8d395ca64c2af13033eee098ca
 
         let runConstructor = (readableStream) => {
             let tempRow = new Row(...readableStream);
