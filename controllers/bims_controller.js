@@ -1,12 +1,10 @@
 import fs from 'fs';
-import csv from 'csv-parse';
+import csv from 'fast-csv';
 
-let parser = csv();
 
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
-        let i = 0;
         let num = 1000;
         let batch = [];
 
@@ -26,32 +24,39 @@ module.exports = {
             this.RSO_Units_Billed = c13;
             this.SCEP_Units_Billed = c14;
         }
-     
-        let done = () => {
-            stream.unpipe(parser);
-            parser.end();
-            stream.destroy();
-        }
 
-        let runConstructor = (r) => {
-            var tempRow = new Row(...r);
+        let csvStream = csv({quote: null})
+            .on("data", function(data){
+                runConstructor(data);
+            })
+            .on("end", function(){
+                // Last batch DB function goes here
+                console.log("done");
+            });
+
+
+        let runConstructor = (readableStream) => {
+            let tempRow = new Row(...readableStream);
             batch.push(tempRow);
+            if(batch.length % num === 0){
+                pause();
+                // DB function goes here
+                resume();
+            }
         }
 
-        parser.on('readable', () => {
-            if (i <= num) {
-                runConstructor(parser.read());
-                i++;
-            } else {
-                done();
-            }
-        });
+        let pause = () => {
+            stream.unpipe(csvStream);
+            return csvStream.pause();
+        }
 
-        parser.on('error', () => {
-            console.error;
-        });
+        let resume = () => {
+            batch = [];
+            stream.pipe(csvStream);
+            return csvStream.resume();
+        } 
 
-        parser.on('finish', done);
-        stream.pipe(parser);
+        stream.pipe(csvStream);
     }
 }
+
