@@ -9,7 +9,6 @@ let parser = csv({separator:',', quote: '"'});
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
-        let i = 0;
         let num = 1000;
         let batch = [];
 
@@ -67,11 +66,10 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-                i++
-                console.log(`----------${i}-----------------`);
                 runConstructor(data);
             })
             .on("end", function(){
+                // Last batch DB function goes here
                 console.log("done");
             });
 
@@ -79,10 +77,24 @@ module.exports = {
 
         let runConstructor = (readableStream) => {
             let tempRow = new Row(...readableStream);
-            // batch.push(tempRow);
-            console.log(tempRow);
-            return;
+            batch.push(tempRow);
+            if(batch.length % num === 0){
+                pause();
+                // DB function goes here
+                resume();
+            }
         }
+
+        let pause = () => {
+            stream.unpipe(csvStream);
+            return csvStream.pause();
+        }
+
+        let resume = () => {
+            batch = [];
+            stream.pipe(csvStream);
+            return csvStream.resume();
+        } 
 
         stream.pipe(csvStream);
     }
