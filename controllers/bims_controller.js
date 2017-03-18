@@ -4,7 +4,7 @@ import csv from 'fast-csv';
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
-        let num = 1000;
+        let batchSize = 1000;
         let rawBatch = [];
         let addressMasterBatch = [];
 
@@ -24,6 +24,7 @@ module.exports = {
             this.RSO_Units_Billed = c13;
             this.SCEP_Units_Billed = c14;
         }
+
         function AddressMaster(a1, a2, a3, a4, a5, a6 , a7, a8){
             this.street_num = a1;
             this.street_name = a2;
@@ -37,18 +38,18 @@ module.exports = {
 
         // CLEANS EACH LINE, Replaces unwated , with spaces, replaces "," with , and removes " before and after each string
         let cleanUpLine = (data)=> {
-                let cleanedLine = data.toString();
-                cleanedLine
+                let line = data.toString();
+                let cleanLine = line
                     .replace(/, /g, ' ')
                     .replace(/","/g, ',')
                     .replace(/"/g, '')
                     .split(',')
-               return cleanedLine
+               return cleanLine
         }
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-       
+  
                 // runAddressMaster(data)
                 runRawData(cleanUpLine(data));
             })
@@ -56,7 +57,7 @@ module.exports = {
                 // Last batch DB function goes here
                 console.log("done");
             });
-
+            
         let runAddressMaster = (readableStream) => {
             let rawPropAddress = readableStream[4].trim();
             let rawCityStateZip = readableStream[5].trim();
@@ -66,9 +67,8 @@ module.exports = {
         let runRawData = (readableStream) => {
             let tempData = new RawData(...readableStream);
             rawBatch.push(tempData);
-            if(rawBatch.length % num === 0){
+            if(rawBatch.length % batchSize === 0){
                 pause();
-                console.log(rawBatch);
                 resume();
             }
         }
