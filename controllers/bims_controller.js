@@ -5,7 +5,6 @@ module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
         let num = 1000;
-        let i = 0;
         let rawBatch = [];
         let addressMasterBatch = [];
 
@@ -38,13 +37,13 @@ module.exports = {
 
         // CLEANS EACH LINE, Replaces unwated , with spaces, replaces "," with , and removes " before and after each string
         let cleanUpLine = (data)=> {
-                let dirty = data.toString();
-                let replace = dirty
+                let cleanedLine = data.toString();
+                cleanedLine
                     .replace(/, /g, ' ')
                     .replace(/","/g, ',')
                     .replace(/"/g, '')
                     .split(',')
-               return replace
+               return cleanedLine
         }
 
         let csvStream = csv({quote: null})
@@ -57,11 +56,13 @@ module.exports = {
                 // Last batch DB function goes here
                 console.log("done");
             });
+
         let runAddressMaster = (readableStream) => {
             let rawPropAddress = readableStream[4].trim();
             let rawCityStateZip = readableStream[5].trim();
             let tempAddress = new AddressMaster();
         }
+
         let runRawData = (readableStream) => {
             let tempData = new RawData(...readableStream);
             rawBatch.push(tempData);
@@ -71,11 +72,13 @@ module.exports = {
                 resume();
             }
         }
-        let pause = () => {
+
+        function pause(){
             stream.unpipe(csvStream);
             return csvStream.pause();
         }
-        let resume = () => {
+
+        function resume(){
             rawBatch = [];
             addressMasterBatch = [];
             stream.pipe(csvStream);
