@@ -35,7 +35,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
 });
 
 router.get('/test', (req,res) => {
-    require('./controllers/bims_controller.js').readData(app);
+    require('./controllers/prop_site_address_controller.js').readData(app);
     res.status(301).redirect('/');
 });
 

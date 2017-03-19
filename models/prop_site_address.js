@@ -6,10 +6,7 @@ export default (sequelize, DataTypes) => {
 		},
         HouseID: {
 			type: DataTypes.STRING
-		},
-        HouseID: {
-			type: DataTypes.STRING
-		},  
+		}, 
         Pin: {
 			type: DataTypes.STRING
 		},  
