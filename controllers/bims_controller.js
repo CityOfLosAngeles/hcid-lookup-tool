@@ -51,7 +51,11 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-                runConstructors(cleanUpLine(data));
+                if(data[0].includes("StatementNum")){
+                    return;
+                } else {
+                    runConstructors(cleanUpLine(data));
+                }
             })
             .on("end", function(){
                 // Last batch DB function goes here
@@ -123,8 +127,6 @@ module.exports = {
             // Batch control: limits arrays to 1000 address objects, then runs DB functions and starts again
             if(rawBatch.length % batchSize === 0 && rawBatch.length !== 0){
                 pause();
-                console.log(rawBatch[999]);
-                console.log(addressMasterBatch[999]);
                 // Function call for checking DB and seeding DB goes here
                 resume();
             }

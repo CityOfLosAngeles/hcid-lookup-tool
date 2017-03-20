@@ -34,8 +34,14 @@ router.post('/upload', upload.single('file'), (req, res) => {
 	res.status(301).redirect('/');
 });
 
-router.get('/test', (req,res) => {
+// Test routes (will be removed)
+router.get('/bims', (req,res) => {
     require('./controllers/bims_controller.js').readData(app);
+    res.status(301).redirect('/');
+});
+
+router.get('/hims', (req,res) => {
+    require('./controllers/hims_controller.js').readData(app);
     res.status(301).redirect('/');
 });
 

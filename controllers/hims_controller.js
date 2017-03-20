@@ -19,7 +19,7 @@ module.exports = {
             this.HouseNum = c8;
             this.HouseFracNum = c9;
             this.PIN = c10; 
-            this.CouncilDistric = c11;
+            this.CouncilDistrict = c11;
             this.PreDirCd = c12;
             this.StreetName = c13;
             this.StreetTypeCd = c14;
@@ -58,25 +58,58 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-  
-                // runAddressMaster(data)
-                runRawData(cleanUpLine(data));
+                if(data[0].includes("HOUSING_PROGRAM")){
+                    return;
+                } else {
+                    runConstructors(cleanUpLine(data));
+                }
             })
             .on("end", function(){
                 // Last batch DB function goes here
                 console.log("done");
             });
             
-        let runAddressMaster = (readableStream) => {
-            let tempAddress = new AddressMaster();
+        function runAddressMaster(readableStream){
+            let state = 'CA';
+
+            let street_num = readableStream[7];
+            if(!street_num){street_num = null;}
+
+            let street_dir_cd = readableStream[11];
+            if(!street_dir_cd){street_dir_cd = null;}
+
+            let street_name = readableStream[12];
+            if(!street_name){street_name = null;}
+
+            let street_type = readableStream[13];
+            if(!street_type){street_type = null;}
+
+            let street_unit = `${readableStream[15]} ${readableStream[16]}`;
+            if(street_unit === ' '){street_unit = null;}
+
+            let zipcode = readableStream[17];
+            if(!zipcode){zipcode = null;}
+
+            let city = readableStream[18];
+            if(!city){city = null;}
+
+            let tempAddress = new AddressMaster(street_num, street_name, street_type, street_dir_cd, street_unit, city, state, zipcode);
+            addressMasterBatch.push(tempAddress);
         }
 
-        let runRawData = (readableStream) => {
+        function runRawData(readableStream){
             let tempData = new RawData(...readableStream);
-            console.log(tempData)
             rawBatch.push(tempData);
-            if(rawBatch.length % batchSize === 0){
+        }
+
+        function runConstructors(readableStream) {
+            runRawData(readableStream);
+            runAddressMaster(readableStream);
+
+            // Batch control: limits arrays to 1000 address objects, then runs DB functions and starts again
+            if(rawBatch.length % batchSize === 0 && rawBatch.length !== 0){
                 pause();
+                // Function call for checking DB and seeding DB goes here
                 resume();
             }
         }
