@@ -51,9 +51,7 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-                if(data[0].includes("StatementNum")){
-                    return;
-                } else {
+                if(!data[0].includes("StatementNum")){
                     runConstructors(cleanUpLine(data));
                 }
             })
@@ -67,21 +65,17 @@ module.exports = {
             rawBatch.push(tempData); 
         }
 
-        function runAddressMaster(readableStream){
-            let rawPropAddress = readableStream[3];
-            let rawCityStateZip = readableStream[4];
+        function cityStateZipParse(rawCityStateZip){
+            let parsedCity = [];
             let splitCityStateZip = rawCityStateZip.split(' ');
+            parsedCity.push(splitCityStateZip.pop());
+            parsedCity.push(splitCityStateZip.pop());
+            parsedCity.push(splitCityStateZip.join(' '));
+            return parsedCity;
+        }
+
+        function addressParse(rawPropAddress){
             let splitPropAddress = rawPropAddress.split(' ');
-
-            // Gets Zipcode
-            let rawZipcode = splitCityStateZip.pop();
-
-            // Gets State
-            let rawState = splitCityStateZip.pop();
-
-            // Gets City
-            let rawCity = splitCityStateZip.join(' ');
-
             // Parses Address using parse-address module
             let addressObject = addressParser.parseLocation(rawPropAddress);
 
@@ -111,12 +105,26 @@ module.exports = {
 
             // Aparment unit info is what's left in array, assigns it to addressUnit if it exists, otherwise makes it null
             let addressUnit = splitPropAddress.join(' ');
-            if(!addressUnit){
-                addressUnit = null;
-            }
+            if(!addressUnit){addressUnit = null;}
+
+            let parsedAddress = [addressDirection, addressUnit, addressObject];
+
+            return parsedAddress;
+        }
+
+        function runAddressMaster(readableStream){
+            let rawCity, 
+                rawState,
+                rawZipcode,
+                rawDirection,
+                rawUnit,
+                addressObject;
+
+            [rawZipcode, rawState, rawCity] = cityStateZipParse(readableStream[4]);
+            [rawDirection, rawUnit, addressObject] = addressParse(readableStream[3]);
 
             // Runs parsed data through AddressMaster contrustor and pushes it to the batch
-            let tempAddress = new AddressMaster(addressObject.number, addressObject.street, addressObject.type, addressDirection, addressUnit, rawCity, rawState, rawZipcode);
+            let tempAddress = new AddressMaster(addressObject.number, addressObject.street, addressObject.type, rawDirection, rawUnit, rawCity, rawState, rawZipcode);
             addressMasterBatch.push(tempAddress); 
         }
 

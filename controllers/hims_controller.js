@@ -58,9 +58,7 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-                if(data[0].includes("HOUSING_PROGRAM")){
-                    return;
-                } else {
+                if(!data[0].includes("HOUSING_PROGRAM")){
                     runConstructors(cleanUpLine(data));
                 }
             })
@@ -125,6 +123,7 @@ module.exports = {
             stream.pipe(csvStream);
             return csvStream.resume();
         } 
+        
         stream.pipe(csvStream);
     }
 }
