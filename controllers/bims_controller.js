@@ -1,13 +1,15 @@
 import fs from 'fs';
 import csv from 'fast-csv';
 import addressParser from 'parse-address';
+import addressController from './address.js';
 
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
-        let batchSize = 1000;
+        let batchSize = 10;
         let rawBatch = [];
         let addressMasterBatch = [];
+        let counter = 0;
 
         function RawData(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14) {
             this.StatementNum = c1;
@@ -51,9 +53,7 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-                if(data[0].includes("StatementNum")){
-                    return;
-                } else {
+                if(!data[0].includes("StatementNum")){
                     runConstructors(cleanUpLine(data));
                 }
             })
@@ -67,21 +67,17 @@ module.exports = {
             rawBatch.push(tempData); 
         }
 
-        function runAddressMaster(readableStream){
-            let rawPropAddress = readableStream[3];
-            let rawCityStateZip = readableStream[4];
+        function cityStateZipParse(rawCityStateZip){
+            let parsedCity = [];
             let splitCityStateZip = rawCityStateZip.split(' ');
+            parsedCity.push(splitCityStateZip.pop());
+            parsedCity.push(splitCityStateZip.pop());
+            parsedCity.push(splitCityStateZip.join(' '));
+            return parsedCity;
+        }
+
+        function addressParse(rawPropAddress){
             let splitPropAddress = rawPropAddress.split(' ');
-
-            // Gets Zipcode
-            let rawZipcode = splitCityStateZip.pop();
-
-            // Gets State
-            let rawState = splitCityStateZip.pop();
-
-            // Gets City
-            let rawCity = splitCityStateZip.join(' ');
-
             // Parses Address using parse-address module
             let addressObject = addressParser.parseLocation(rawPropAddress);
 
@@ -111,12 +107,32 @@ module.exports = {
 
             // Aparment unit info is what's left in array, assigns it to addressUnit if it exists, otherwise makes it null
             let addressUnit = splitPropAddress.join(' ');
-            if(!addressUnit){
-                addressUnit = null;
-            }
+            if(!addressUnit){addressUnit = null;}
+            
+            let parsedAddress = [addressDirection, addressUnit, addressObject];
+
+            return parsedAddress;
+        }
+
+        function runAddressMaster(readableStream){
+            let rawCity, 
+                rawState,
+                rawZipcode,
+                rawDirection,
+                rawUnit,
+                addressObject;
+
+            [rawZipcode, rawState, rawCity] = cityStateZipParse(readableStream[4]);
+            [rawDirection, rawUnit, addressObject] = addressParse(readableStream[3]);
+
+             // Checking to see if street_type exists, setting it null if it does not
+            if(!addressObject.type && addressObject){addressObject.type = null;}
+             // Checking to see if street_type exists, setting it null if it does not
+            if(!addressObject.number && addressObject){addressObject.number = null;}
+
 
             // Runs parsed data through AddressMaster contrustor and pushes it to the batch
-            let tempAddress = new AddressMaster(addressObject.number, addressObject.street, addressObject.type, addressDirection, addressUnit, rawCity, rawState, rawZipcode);
+            let tempAddress = new AddressMaster(addressObject.number, addressObject.street, addressObject.type, rawDirection, rawUnit, rawCity, rawState, rawZipcode);
             addressMasterBatch.push(tempAddress); 
         }
 
@@ -124,12 +140,22 @@ module.exports = {
             runRawData(readableStream);
             runAddressMaster(readableStream);
 
-            // Batch control: limits arrays to 1000 address objects, then runs DB functions and starts again
-            if(rawBatch.length % batchSize === 0 && rawBatch.length !== 0){
-                pause();
-                // Function call for checking DB and seeding DB goes here
-                resume();
+            // Batch control: limits arrays to X AMOUNT of address objects, then runs DB functions and starts again
+            if(rawBatch.length % batchSize === 0 && rawBatch.length > 0){
+                console.log('******************\ninside if statement\n******************\n');
+                checkAddress(rawBatch, addressMasterBatch );
+                // addressController.createAddress5(addressMasterBatch);
             }
+        }
+        
+        // function checkAddress(rawBatch, addressMasterBatch, callback ) {
+        function checkAddress(rawBatch, addressMasterBatch ) {
+            pause();
+            counter++;
+            console.log(`**********************\nBatch Counter: ${counter}\n***************************************************`);
+            addressController.createAddress6(addressMasterBatch);
+            return;
+            //  callback();
         }
 
         // Function to pause data stream from file
