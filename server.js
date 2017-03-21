@@ -35,7 +35,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
 });
 
 router.get('/test', (req,res) => {
-    require('./controllers/prop_iter_controller.js').readData(app);
+    require('./controllers/scep_iter_controller.js').readData(app);
     res.status(301).redirect('/');
 });
 
