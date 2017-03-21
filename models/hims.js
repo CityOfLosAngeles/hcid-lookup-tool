@@ -31,7 +31,7 @@ export default (sequelize, DataTypes) => {
         PIN: {
 			type: DataTypes.STRING
 		},
-        CouncilDistric: {
+        CouncilDistrict: {
 			type: DataTypes.STRING
 		},
         PreDirCd: {
