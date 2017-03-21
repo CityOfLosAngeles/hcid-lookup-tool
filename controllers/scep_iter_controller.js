@@ -3,7 +3,7 @@ import csv from 'fast-csv';
 
 module.exports = {
     readData: (app) => {
-        let stream = fs.createReadStream("./temp-data/prop_unit.csv");
+        let stream = fs.createReadStream("./temp-data/scep.csv");
         let batchSize = 1000;
         let rawBatch = [];
         let addressMasterBatch = [];
