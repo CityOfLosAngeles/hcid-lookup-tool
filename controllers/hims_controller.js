@@ -4,7 +4,7 @@ import csv from 'fast-csv';
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/hims.csv");
-        let batchSize = 1000;
+        let batchSize = 100;
         let rawBatch = [];
         let addressMasterBatch = [];
 
@@ -107,6 +107,8 @@ module.exports = {
             // Batch control: limits arrays to 1000 address objects, then runs DB functions and starts again
             if(rawBatch.length % batchSize === 0 && rawBatch.length !== 0){
                 pause();
+                console.log(rawBatch[0]);
+                console.log(addressMasterBatch[0]);
                 // Function call for checking DB and seeding DB goes here
                 resume();
             }

@@ -7,6 +7,9 @@ module.exports = {
         let stream = fs.createReadStream("./temp-data/bims.csv");
         let batchSize = 1000;
         let rawBatch = [];
+        
+        let check = 0;
+
         let addressMasterBatch = [];
 
         function RawData(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14) {
@@ -106,6 +109,9 @@ module.exports = {
             // Aparment unit info is what's left in array, assigns it to addressUnit if it exists, otherwise makes it null
             let addressUnit = splitPropAddress.join(' ');
             if(!addressUnit){addressUnit = null;}
+
+            // Checking to see if street_type exists, setting it null if it does not
+            if(!addressObject.type && addressObject){addressObject.type = null;}
 
             let parsedAddress = [addressDirection, addressUnit, addressObject];
 
