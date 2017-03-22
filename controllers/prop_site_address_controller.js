@@ -82,9 +82,9 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-           
-                // runAddressMaster(data)
-                runRawData(cleanUpLine(data));
+                if(!data[0].includes("Apn")){
+                    runConstructors(cleanUpLine(data));
+                }
             })
             .on("end", function(){
                 // Last batch DB function goes here
@@ -92,17 +92,48 @@ module.exports = {
             });
             
         let runAddressMaster = (readableStream) => {
-            let rawPropAddress = readableStream[4].trim();
-            let rawCityStateZip = readableStream[5].trim();
-            let tempAddress = new AddressMaster();
+            let state = 'CA';
+
+            let street_num = readableStream[3];
+            if(!street_num){street_num = null;}
+
+            let street_dir_cd = readableStream[5];
+            if(!street_dir_cd){street_dir_cd = null;}
+
+            let street_name = readableStream[6];
+            if(!street_name){street_name = null;}
+
+            let street_type = readableStream[7];
+            if(!street_type){street_type = null;}
+
+            let street_unit = readableStream[9];
+            if(!street_unit){street_unit = null;}
+
+            let zipcode = readableStream[11];
+            if(!zipcode){zipcode = null;}
+
+            let city = readableStream[10];
+            if(!city){city = null;}
+
+            let tempAddress = new AddressMaster(street_num, street_name, street_type, street_dir_cd, street_unit, city, state, zipcode);
+            addressMasterBatch.push(tempAddress);
         }
 
         let runRawData = (readableStream) => {
             let tempData = new RawData(...readableStream);
-            console.log(tempData)
             rawBatch.push(tempData);
-            if(rawBatch.length % batchSize === 0){
+        }
+
+        function runConstructors(readableStream) {
+            runRawData(readableStream);
+            runAddressMaster(readableStream);
+
+            // Batch control: limits arrays to 1000 address objects, then runs DB functions and starts again
+            if(rawBatch.length % batchSize === 0 && rawBatch.length !== 0){
                 pause();
+                console.log(rawBatch[0]);
+                console.log(addressMasterBatch[0]);
+                // Function call for checking DB and seeding DB goes here
                 resume();
             }
         }
@@ -118,6 +149,7 @@ module.exports = {
             stream.pipe(csvStream);
             return csvStream.resume();
         } 
+
         stream.pipe(csvStream);
     }
 }
