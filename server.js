@@ -4,14 +4,11 @@ import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
 import db from './models';
-import soda from 'soda-js';
-import https from 'https';
-
 const router = express.Router();
 
 const PORT = process.env.PORT || 6060;
 
- var consumer = new soda.Consumer('data.lacounty.gov');
+
 // ************** MULTER CONFIG ****************** // 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -68,21 +65,6 @@ router.get('/scep', (req,res) => {
     require('./controllers/scep_controller.js').readData(app);
     res.status(301).redirect('/');
 });
-
-router.get('/data/api', (req,res)=>{
-
-
-   consumer.query()
-  .withDataset('mdji-9cym')
-  .limit(5)
-  .where({ 'ain':'2004001003' })
-  .getRows()
-    .on('success', function(rows) { 
-        res.send(rows) 
-    })
-    .on('error', function(error) { console.error(error); })
-    
-})
 
 
 let app = express();
