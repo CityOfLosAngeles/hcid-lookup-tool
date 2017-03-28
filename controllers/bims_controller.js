@@ -108,7 +108,7 @@ module.exports = {
             // Aparment unit info is what's left in array, assigns it to addressUnit if it exists, otherwise makes it null
             let addressUnit = splitPropAddress.join(' ');
             if(!addressUnit){addressUnit = null;}
-            
+
             let parsedAddress = [addressDirection, addressUnit, addressObject];
 
             return parsedAddress;
@@ -130,7 +130,6 @@ module.exports = {
              // Checking to see if street_type exists, setting it null if it does not
             if(!addressObject.number && addressObject){addressObject.number = null;}
 
-
             // Runs parsed data through AddressMaster contrustor and pushes it to the batch
             let tempAddress = new AddressMaster(addressObject.number, addressObject.street, addressObject.type, rawDirection, rawUnit, rawCity, rawState, rawZipcode);
             addressMasterBatch.push(tempAddress); 
@@ -145,6 +144,7 @@ module.exports = {
                 console.log('******************\ninside if statement\n******************\n');
                 checkAddress(rawBatch, addressMasterBatch );
                 // addressController.createAddress5(addressMasterBatch);
+
             }
         }
         
