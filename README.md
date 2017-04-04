@@ -52,6 +52,14 @@ Neighborhood Development
 
 Lookup Tool - a website with an automated ETL process on the data exports and a search and lookup functionality. 
 
+### Load Script
+
+To load the data, you'll need a database called hcid-disp running in postgres. You'll also need the data files stored in the `data` directory, which is ignored from git in the `.gitignore`. 
+
+Additionally, you'll need to install csvkit. Run `pip install csvkit` to install the package. 
+
+Run `etl/load.sh` from the project root dir and it should create the data tables and run the join query for the APN master table. 
+
 ## Data Sources
 
 HIMS
