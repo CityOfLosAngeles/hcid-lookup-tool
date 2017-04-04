@@ -10,8 +10,10 @@ for file in ./data/*; do
       echo "Prop Unit is bad"
       continue 
   fi
-  csvclean -v $file
+  csvclean -v $file & # send to background for speed
+  echo "clean finishing for " $file
 done
+wait #until processes are done. 
 
 # insert into postgres
 for clean_file in ./data/*_out.csv; do
