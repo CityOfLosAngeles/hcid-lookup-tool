@@ -26,3 +26,5 @@ done
 rm ./data/*_out.csv
 rm ./data/*_err.csv
 
+psql -d hcid-disp -a -f ./etl/join.sql
+
