@@ -121,15 +121,15 @@ module.exports = {
 
 
     createAddress7: (newAddressObject, rawBatchObject) => {
-        
+
             return db.sequelize.transaction((t) => {
                 return db.AddressMaster.findOrCreate({
                         where: {
                             street_num: parseInt(newAddressObject.street_num),
-                            street_name: newAddressObject.street_name,
-                            street_unit: newAddressObject.street_unit
+                            street_name: newAddressObject.street_name
                         },
                         defaults: {
+                            street_unit: newAddressObject.street_unit,
                             street_type: newAddressObject.street_type,
                             street_dir_cd: newAddressObject.street_dir_cd,
                             city: newAddressObject.city,
@@ -137,26 +137,22 @@ module.exports = {
                             zipcode: newAddressObject.zipcode
                         }, transaction: t
                     })
-                    .spread( (result, created) => {
-                        console.log('\n\n*** in the spread');
-                        console.log('\nCreated:', created);
-                        return result.dataValues;
+                    .then( (AddressObject) => {
+                        // console.log(AddressObject);
+                        rawBatchObject.AddressMasterId = AddressObject[0].dataValues.id;
+                        return db.Bims.create(rawBatchObject, 
+                            {
+                                transaction: t, 
+                                include:
+                                    {model: db.AddressMaster} 
+                            }
+                        );
                     })
-                    .then( (result) => {
-                        console.log('\n\n$$$$$$$  INTO THE BIMS CREATE $$$$$$$$');
-                        console.log('\n\nThen - ', result);
-                        rawBatchObject.AddressMasterID = result.id;
-                        console.log(rawBatchObject);
-                      return db.Bims.create(rawBatchObject, {transaction: t})
-                            .then( (r) => console.log('Success!'))
-                            .catch( (error) => console.log('Error'));
-                    })
-                    .catch( (error) => console.log(error)
-                    );
-            });
+                    .catch( (error) => console.error('findOrCreate Master Address didn\'t work') );
+            })
+            .then( (r) => console.log('\nnew insert to Address Master and BIMS!\n') )
+            .catch( (error) => console.log('\nerror at the transaction level\n'));
 
-    }, // end of CREATE #7
-
-
+    } // end of CREATE #7
 
 } // end of MODULE
