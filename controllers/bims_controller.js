@@ -6,7 +6,6 @@ import addressController from './address.js';
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
-        let batchSize = 100;
         let rawBatch = [];
         let addressMasterBatch = [];
         let counter = 0;
@@ -145,38 +144,27 @@ module.exports = {
         
         // function checkAddress(rawBatch, addressMasterBatch, callback ) {
         function checkAddress(rawBatchObject, addressMasterBatchObject) {
-          
             pause2()
                 .then( () => {
                     counter++;
-                    console.log(`**********************\n  Object Counter: ${counter}\n***************************************************`);
-                   return addressController.createAddress7(addressMasterBatchObject, rawBatchObject);
+                    console.log(`**********************\nObject Counter: ${counter}\n***************************************************`);
+                    return addressController.createAddress7(addressMasterBatchObject, rawBatchObject);
                 })
                 .then( () => {
-                    rawBatch.shift();
-                    addressMasterBatch.shift();
+                    deleteObject();
                 })
                 .then( () => {
                     resume();
                 })
                 .catch( (error) => {
-                    console.log(error);
+                    console.error(error);
                 });
         }
 
         // Function to pause data stream from file
-        function pause(){
-            counter++;
-            console.log(`**********************\n  Object Counter: ${counter}\n***************************************************`);
-            stream.unpipe(csvStream)
-            return csvStream.pause();
-        }
-
         function pause2() {
-            console.log('$$ inside pause2 - outside promise $$');
             return new Promise(
                 (resolve, reject) => {
-                    console.log('** inside pause2 - inside PROMISE **');
                     stream.unpipe(csvStream)
                     resolve( csvStream.pause() );
                 }
@@ -184,7 +172,7 @@ module.exports = {
         }
 
         function deleteObject() {
-            console.log('inside deleteObject');
+            console.log('\ninside deleteObject\n');
             return new Promise(
                 (resolve, reject) => {
                     rawBatch.shift();

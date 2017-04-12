@@ -1,0 +1,22 @@
+<div class="background-logo">
+	<img src="assets/images/la-logo.png">
+</div>
+
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href=# class="brand-logo center">HCID File Upload</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/search">Search</a></li>
+            </ul>
+        </div>
+    </nav>
+ </div>
+
+<div class="upload-box">
+	<form action="/upload-data" method="post" enctype="multipart/form-data">
+	  	<label for="file" class="btn choose-btn">Select File</label>
+	    <input id="file" type="file" name="file" />
+	    <input class="btn upload-btn" type="submit" value="Upload">
+	</form>
+</div>
