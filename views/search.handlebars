@@ -11,17 +11,44 @@
             </ul>
         </div>
     </nav>
- </div>
- <div class="navbar-fixed">
-    <nav>
-        <div class="nav-wrapper">
-            <form>
-				<div class="input-field">
-					<input placeholder="Search by Address" id="search" type="search" required>
-          			<label class="label-icon" for="search"><i class="material-icons">search</i></label>
-					<i class="material-icons">close</i>
-				</div>
-			</form>
+</div>
+
+<div class="row search-box">
+    <form class="col s12" action="/query" method="POST">
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="street_number" type="text" name="street_number">
+                <label for="street_number">Street Number</label>
+            </div>
+            <div class="input-field col s2">
+                <input id="direction" type="text" name="direction">
+                <label for="direction">Direction</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="street_name" type="text" name="street_name">
+                <label for="street_name">Street Name</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="street_type" type="text" name="street_type">
+                <label for="street_type">Street Type</label>
+            </div>
         </div>
-    </nav>
- </div>
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="unit_number" type="text" name="unit_number">
+                <label for="unit_number">Unit Number</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="city" type="text" name="city">
+                <label for="city">City</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="zipcode" type="text" name="zipcode">
+                <label for="zipcode">Zipcode</label>
+            </div>
+            <div class="col s3">
+                <input class="btn search-btn" type="submit" value="Search">
+            </div>
+        </div>
+    </form>
+</div>

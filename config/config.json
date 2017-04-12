@@ -1,7 +1,7 @@
 {
     "development": {
-        "username": "Matt",
-        "password": "Booya123",
+        "username": null,
+        "password": null,
         "database": "hcid-db",
         "dialect": "postgres",
         "protocol": "postgres",

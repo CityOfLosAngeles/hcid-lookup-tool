@@ -4,17 +4,23 @@ import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
 import db from './models';
+import bodyParser from 'body-parser';
+import exphbs from 'express-handlebars';
+
 const router = express.Router();
 const app = express();
-
 const PORT = process.env.PORT || 6060;
 
 // Handlebars Config //
-import exphbs from 'express-handlebars';
 app.use(express.static(process.cwd() + "/public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+// Body Parser config //
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // ************** MULTER CONFIG ****************** // 
 const storage = multer.diskStorage({
@@ -33,7 +39,7 @@ const upload = multer({storage: storage}); // PASS THE CONFIG INTO MULTER
 router.get('/', (req, res) => {
     checkFolder('uploads');
     checkFolder('temp-data');
-    res.sendFile(path.join(__dirname, './public/index.html'))
+    res.redirect('/search');
 });
 
 router.post('/upload-data', upload.single('file'), (req, res) => {
@@ -42,8 +48,7 @@ router.post('/upload-data', upload.single('file'), (req, res) => {
 });
 
 
-
-// Handlebars Test Routes
+// Handlebars Routes
 router.get('/search', (req, res) =>{
     res.render('search');
 });
@@ -52,6 +57,18 @@ router.get('/upload', (req, res) =>{
     res.render('upload');
 });
 
+router.post('/query', (req, res) => {
+    let query = {
+        street_number: req.body.street_number,
+        direction: req.body.direction,
+        name: req.body.street_name,
+        type: req.body.street_type,
+        unit: req.body.unit_number,
+        city: req.body.city,
+        zipcode: req.body.zipcode
+    }
+    res.redirect('/search');
+});
 
 
 // Test routes (will be removed)
