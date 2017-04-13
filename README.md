@@ -73,3 +73,24 @@ Homeownership
 Other Non-City Tax Credits and Financed
 
 We've pulled these togehter into a single SQL Server database backup, called `datalake.bak`. The Database name is DataLake. 
+
+## Resources
+
+[LA City Geohub Parcel](http://geohub.lacity.org/datasets/6d85cb5f5f5641c6aa95203849ca05bb_0)
+[LA County APN Change File](https://data.lacounty.gov/Parcel-/Assessor-Parcel-Change-File/qju6-wpwm)
+[LA County Parcel Data](https://data.lacounty.gov/Parcel-/Assessor-Parcels-Data-2016/7rjj-f2pv)
+
+
+## Technology / Node Packages
+
+[Node v6.x](https://nodejs.org/dist/latest-v6.x/docs/api/)
+[Postgres v9.6](https://www.postgresql.org/docs/9.6/static/index.html)
+
+[Sequelize ORM](http://docs.sequelizejs.com/en/v3/)
+[Babel](https://babeljs.io/)
+
+[BlueBird npm](http://bluebirdjs.com/docs/getting-started.html)
+[Parse-address npm](https://www.npmjs.com/package/parse-address)
+[Fast-csv npm](https://www.npmjs.com/package/fast-csv)
+[Multer npm](https://www.npmjs.com/package/multer)
+

@@ -34,6 +34,6 @@
     "parse-address": "0.0.6",
     "pg": "6.1.4",
     "sequelize": "3.30.2",
-    "soda-js": "^0.2.3"
+    "soda-js": "0.2.3"
   }
 }
