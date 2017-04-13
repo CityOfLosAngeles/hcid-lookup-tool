@@ -57,26 +57,15 @@ router.get('/upload', (req, res) => {
     res.render('upload');
 });
 
-router.post('/query', (req, res) => {
-    let query = {
-        street_number: req.body.street_number,
-        direction: req.body.direction,
-        name: req.body.street_name,
-        type: req.body.street_type,
-        unit: req.body.unit_number,
-        city: req.body.city,
-        zipcode: req.body.zipcode
-    }
-
+router.get('/query', (req, res) => {
     db.address_master.findAll({
         where: {
-            street_number: query.street_number,
-            direction: query.direction,
-            name: query.street_name,
-            type: query.street_type,
-            unit: query.unit_number,
-            city: query.city,
-            zipcode: query.zipcode
+            street_number: req.body.street_number,
+            direction: req.body.direction,
+            name: req.body.street_name,
+            type: req.body.street_type,
+            city: req.body.city,
+            zipcode: req.body.zipcode
         },
         include: {
             model: db.bims,
@@ -89,10 +78,10 @@ router.post('/query', (req, res) => {
     })
         .then((result) => {
             let queryResult = {
-                info: [result],
-                numberOfUnits: info.length,
+                info: result,
+                infoArrayLength: info.length,
             };
-            response.render('/search', queryResult);
+            res.render('/search', queryResult);
         });
 });
 
