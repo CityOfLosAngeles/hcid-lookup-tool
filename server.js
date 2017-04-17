@@ -76,7 +76,7 @@ router.post('/query', (req, res) => {
 
     db.AddressMaster.findAll({
         where: whereStatement,
-        include: [db.Bims]
+        include: [{model:db.Bims},{model:db.Hims}]
     })
     .then((result) => {
         // let queryResult = {
