@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-// ************** MULTER CONFIG ****************** // 
+// *************** MULTER CONFIG ******************* // 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads')
@@ -34,8 +34,10 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }); // PASS THE CONFIG INTO MULTER
-// *************************************************// 
+// ***************************************************// 
 
+
+// ************* CSV Upload ***************** // 
 router.get('/', (req, res) => {
     checkFolder('uploads');
     checkFolder('temp-data');
@@ -46,9 +48,10 @@ router.post('/upload-data', upload.single('file'), (req, res) => {
     watchFolder();
     res.status(301).redirect('/upload');
 });
+// *******************************************//
 
 
-// Handlebars Routes
+// ************** Handlebars Routes ****************** //
 router.get('/search', (req, res) => {
     res.render('search');
 });
@@ -57,36 +60,38 @@ router.get('/upload', (req, res) => {
     res.render('upload');
 });
 
-router.get('/query', (req, res) => {
-    db.address_master.findAll({
-        where: {
-            street_number: req.body.street_number,
-            direction: req.body.direction,
-            name: req.body.street_name,
-            type: req.body.street_type,
-            city: req.body.city,
-            zipcode: req.body.zipcode
-        },
-        include: {
-            model: db.bims,
-            attritbues: ['StatementDate', 'APN', 'Property_Address', 'Property_City_State_Zip', 'RSO_Exemptions', 'SCEP_Exemptions', 'Total_Units', 'RSO_Units_Billed', 'SCEP_Units_Billed'],
-            include: {
-                model: db.hims,
-                attritbues: ['HOUSING_PROGRAM', 'ProjUniqueID', 'ProjectNo', 'PROJECT_STATUS', 'PROJECT_INFO', 'Apn', 'HouseID', 'HouseNum', 'HouseFracNum', 'CouncilDistrict', 'PreDirCd', 'StreetName', 'StreetTypeCd', 'PostDirCd', 'UnitRange', 'Unit_Number', 'ZipCode', 'City']
-            }
-        }
+router.post('/query', (req, res) => {
+
+    let whereStatement = {};
+
+    if(req.body.street_num){
+        whereStatement.street_num = parseInt(req.body.street_num)
+    }
+    if(req.body.street_name){
+        whereStatement.street_name = req.body.street_name.toUpperCase()
+    }
+    if(req.body.zipcode){
+        whereStatement.zipcode = req.body.zipcode
+    }
+
+    db.AddressMaster.findAll({
+        where: whereStatement,
+        include: [db.Bims]
     })
-        .then((result) => {
-            let queryResult = {
-                info: result,
-                infoArrayLength: info.length,
-            };
-            res.render('/search', queryResult);
-        });
+    .then((result) => {
+        // let queryResult = {
+        //     info: result,
+        //     infoArrayLength: result[0].dataValues.Bims.length,
+        // };
+        // res.render('/search', queryResult);
+
+        result.map( (element) => console.log(element.dataValues))
+    });
 });
+// *************************************************** //
 
 
-// Test routes (will be removed)
+// ************** Test routes (will be removed) ****************** //
 router.get('/bims', (req, res) => {
     require('./controllers/bims_controller.js').readData(app);
     res.status(301).redirect('/');
@@ -116,6 +121,7 @@ router.get('/scep', (req, res) => {
     require('./controllers/scep_controller.js').readData(app);
     res.status(301).redirect('/');
 });
+// ************************************************************** //
 
 
 
