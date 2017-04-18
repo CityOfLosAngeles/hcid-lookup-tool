@@ -29,11 +29,12 @@ module.exports = {
             this.FlgDeleted = c16;
         }
 
-        function AddressMaster(a1, a2, a3, a4) {
+        function AddressMaster(a1, a2, a3, a4, a5) {
             this.street_num = a1;
             this.street_name = a2;
             this.street_type = a3;
             this.street_dir_cd = a4;
+            this.state = a5 
         }
 
         // CLEANS EACH LINE, Replaces unwated , with spaces, replaces "," with , and removes " before and after each string
@@ -62,19 +63,28 @@ module.exports = {
 
         let runAddressMaster = (readableStream) => {
             let state = 'CA';
+
             let street_num = readableStream[11];
+            if (!street_num) { street_num = null; }
+
             let street_name = readableStream[12];
+            if (!street_name) { street_name = null; }
+
             let street_type = readableStream[13].split(' ').pop()
-           
-            let tempAddress = new AddressMaster(street_num, street_name, street_type, state);
-            addressMasterBatch.push(tempAddress); 
+            if (!street_type) { street_type = null; }
+
+            let street_dir_cd = readableStream[14];
+            if(!street_dir_cd){street_dir_cd = null;}
+
+            let tempAddress = new AddressMaster(street_num, street_name, street_type, street_dir_cd, state);
+            addressMasterBatch.push(tempAddress);
         }
 
         let runRawData = (readableStream) => {
             let tempData = new RawData(...readableStream);
             console.log(tempData);
             rawBatch.push(tempData);
-            
+
         }
 
         function runConstructors(readableStream) {
