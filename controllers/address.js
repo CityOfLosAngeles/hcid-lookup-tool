@@ -187,5 +187,40 @@ module.exports = {
             .then( (r) => console.log('\nnew insert to Address Master and HIMS!\n') )
             .catch( (error) => console.log('\nerror at the transaction level\n'));
 
+    }, // end of CREATE #8
+
+    createAddress10: (newAddressObject, rawBatchObject) => {
+
+            return db.sequelize.transaction((t) => {
+                return db.AddressMaster.findOrCreate({
+                        where: {
+                            street_num: parseInt(newAddressObject.street_num),
+                            street_name: newAddressObject.street_name
+                        },
+                        defaults: {
+                            street_unit: null,
+                            street_type: null,
+                            street_dir_cd: null,
+                            city: null,
+                            state: 'CA',
+                            zipcode: null
+                        }, transaction: t
+                    })
+                    .then( (AddressObject) => {
+                        // console.log(AddressObject);
+                        rawBatchObject.AddressMasterId = AddressObject[0].dataValues.id;
+                        return db.Scep.create(rawBatchObject, 
+                            {
+                                transaction: t, 
+                                include:
+                                    {model: db.AddressMaster} 
+                            }
+                        );
+                    })
+                    .catch( (error) => console.error('findOrCreate Master Address didn\'t work') );
+            })
+            .then( (r) => console.log('\nnew insert to Address Master and HIMS!\n') )
+            .catch( (error) => console.log('\nerror at the transaction level\n'));
+
     } // end of CREATE #8
 } // end of MODULE
