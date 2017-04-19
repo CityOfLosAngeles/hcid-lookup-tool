@@ -60,32 +60,50 @@ router.get('/upload', (req, res) => {
     res.render('upload');
 });
 
-router.post('/query', (req, res) => {
+router.get('/query', (req, res) => {
 
     let whereStatement = {};
 
-    if(req.body.street_num){
-        whereStatement.street_num = parseInt(req.body.street_num)
+    if(req.query.street_num){
+        whereStatement.street_num = parseInt(req.query.street_num)
     }
-    if(req.body.street_name){
-        whereStatement.street_name = req.body.street_name.toUpperCase()
+    if(req.query.street_name){
+        whereStatement.street_name = req.query.street_name.toUpperCase()
     }
-    if(req.body.zipcode){
-        whereStatement.zipcode = req.body.zipcode
+    if(req.query.zipcode){
+        whereStatement.zipcode = req.query.zipcode
     }
 
     db.AddressMaster.findAll({
         where: whereStatement,
         include: [{model:db.Bims},{model:db.Hims}]
-    })
-    .then((result) => {
-        // let queryResult = {
-        //     info: result,
-        //     infoArrayLength: result[0].dataValues.Bims.length,
-        // };
-        // res.render('/search', queryResult);
+    }).then((result) => {
 
-        result.map( (element) => console.log(element.dataValues))
+        let queryResult = {
+            info: result
+        };
+
+        res.render('search', queryResult);
+    });
+});
+
+router.get('/testquery', (req, res) => {
+
+    let whereStatement = {
+        street_num: 1007,
+        street_name: 'WATSON',
+        zipcode: '90744'
+    };
+
+    db.AddressMaster.findAll({
+        where: whereStatement,
+        include: [{model:db.Bims},{model:db.Hims}]
+    }).then((result) => {
+        let queryResult = {
+            info: result
+        };
+
+        res.json(queryResult);
     });
 });
 // *************************************************** //
@@ -94,32 +112,27 @@ router.post('/query', (req, res) => {
 // ************** Test routes (will be removed) ****************** //
 router.get('/bims', (req, res) => {
     require('./controllers/bims_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/hims', (req, res) => {
     require('./controllers/hims_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/prop-site', (req, res) => {
     require('./controllers/prop_site_address_controller.js').readData(app);
-    res.status(301).redirect('/');
-});
-
-router.get('/prop-unit', (req, res) => {
-    require('./controllers/prop_unit_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/rent', (req, res) => {
     require('./controllers/rent_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/scep', (req, res) => {
     require('./controllers/scep_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 // ************************************************************** //
 
