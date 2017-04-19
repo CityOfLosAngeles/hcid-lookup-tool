@@ -1,3 +1,7 @@
+a, li, button, div, label, input, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Roboto', sans-serif;
+}
+
 nav {
 	background-color: #81332F;
 }
@@ -57,4 +61,13 @@ body {
 
 #file:focus {
 	outline:none;
+}
+
+.test-buttons form {
+	float: left;
+	margin-right: 5px;
+}
+
+.test-buttons button {
+	background-color: #000;
 }
