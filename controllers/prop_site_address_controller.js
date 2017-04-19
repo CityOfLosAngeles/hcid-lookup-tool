@@ -4,9 +4,9 @@ import csv from 'fast-csv';
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/prop_site_address.csv");
-        let batchSize = 1000;
         let rawBatch = [];
         let addressMasterBatch = [];
+        let counter = 0;
 
         function RawData(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47) {
             this.Apn = c1;
@@ -82,7 +82,9 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
+                console.log('\n$$$$$$$$$ Inside "on data" $$$$$$$$$');
                 if(!data[0].includes("Apn")){
+                    console.log("^^^^^^ Inside if statement of 'on data' ^^^^^^");
                     runConstructors(cleanUpLine(data));
                 }
             })
@@ -125,31 +127,29 @@ module.exports = {
         }
 
         function runConstructors(readableStream) {
+            console.log('####### Inside Run Constructors #######');
             runRawData(readableStream);
             runAddressMaster(readableStream);
-
-            // Batch control: limits arrays to 1000 address objects, then runs DB functions and starts again
-            if(rawBatch.length % batchSize === 0 && rawBatch.length !== 0){
-                pause();
-                console.log(rawBatch[0]);
-                console.log(addressMasterBatch[0]);
-                // Function call for checking DB and seeding DB goes here
-                resume();
-            }
+            checkAddress( rawBatch[counter], addressMasterBatch[counter] );      
         }
 
-        function pause(){
-            stream.unpipe(csvStream);
-            return csvStream.pause();
+        function checkAddress(rawBatchObject, addressMasterBatchObject) {
+            console.log(`********************** Object Counter: ${counter} **********************`);
+            console.log(addressMasterBatchObject);
+            counter++;
+            pause3();
+            addressController.createHims(addressMasterBatchObject, rawBatchObject, resume3);
+        }
+        
+        function pause3(){
+            csvStream.pause();
+            stream.unpipe(csvStream);  
         }
 
-        function resume(){
-            rawBatch = [];
-            addressMasterBatch = [];
+        function resume3(){
+            csvStream.resume();
             stream.pipe(csvStream);
-            return csvStream.resume();
-        } 
-
+        }
         stream.pipe(csvStream);
     }
 }
