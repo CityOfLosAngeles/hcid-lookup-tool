@@ -1,13 +1,14 @@
 import fs from 'fs';
 import csv from 'fast-csv';
 import addressParser from 'parse-address';
+import addressController from './address.js';
 
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/bims.csv");
-        let batchSize = 1000;
         let rawBatch = [];
         let addressMasterBatch = [];
+        let counter = 0;
 
         function RawData(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14) {
             this.StatementNum = c1;
@@ -39,14 +40,14 @@ module.exports = {
 
         // CLEANS EACH LINE, Replaces unwated , with spaces, replaces "," with , and removes " before and after each string
         function cleanUpLine(data){
-                let line = data.toString();
-                let cleanLine = line
-                    .replace(/, /g, ' ')
-                    .replace(/","/g, ',')
-                    .replace(/"/g, '')
-                    .replace(/&/g, ' ')
-                    .split(',')
-               return cleanLine
+            let line = data.toString();
+            let cleanLine = line
+                .replace(/, /g, ' ')
+                .replace(/","/g, ',')
+                .replace(/"/g, '')
+                .replace(/&/g, ' ')
+                .split(',')
+            return cleanLine
         }
 
         let csvStream = csv({quote: null})
@@ -107,6 +108,8 @@ module.exports = {
             let addressUnit = splitPropAddress.join(' ');
             if(!addressUnit){addressUnit = null;}
 
+            addressObject.number = parseInt(addressObject.number);
+
             let parsedAddress = [addressDirection, addressUnit, addressObject];
 
             return parsedAddress;
@@ -123,6 +126,11 @@ module.exports = {
             [rawZipcode, rawState, rawCity] = cityStateZipParse(readableStream[4]);
             [rawDirection, rawUnit, addressObject] = addressParse(readableStream[3]);
 
+             // Checking to see if street_type exists, setting it null if it does not
+            if(!addressObject.type && addressObject){addressObject.type = null;}
+             // Checking to see if street_type exists, setting it null if it does not
+            if(!addressObject.number && addressObject){addressObject.number = null;}
+
             // Runs parsed data through AddressMaster contrustor and pushes it to the batch
             let tempAddress = new AddressMaster(addressObject.number, addressObject.street, addressObject.type, rawDirection, rawUnit, rawCity, rawState, rawZipcode);
             addressMasterBatch.push(tempAddress); 
@@ -131,25 +139,50 @@ module.exports = {
         function runConstructors(readableStream) {
             runRawData(readableStream);
             runAddressMaster(readableStream);
-
-            // Batch control: limits arrays to 1000 address objects, then runs DB functions and starts again
-            if(rawBatch.length % batchSize === 0 && rawBatch.length !== 0){
-                pause();
-                // Function call for checking DB and seeding DB goes here
-                resume();
-            }
+            checkAddress(rawBatch[0], addressMasterBatch[0]);
+        }
+        
+        // function checkAddress(rawBatch, addressMasterBatch, callback ) {
+        function checkAddress(rawBatchObject, addressMasterBatchObject) {
+            pause2()
+                .then( () => {
+                    counter++;
+                    console.log(`**********************\nObject Counter: ${counter}\n***************************************************`);
+                    return addressController.createAddress7(addressMasterBatchObject, rawBatchObject);
+                })
+                .then( () => {
+                    deleteObject();
+                })
+                .then( () => {
+                    resume();
+                })
+                .catch( (error) => {
+                    console.error(error);
+                });
         }
 
         // Function to pause data stream from file
-        function pause(){
-            stream.unpipe(csvStream);
-            return csvStream.pause();
+        function pause2() {
+            return new Promise(
+                (resolve, reject) => {
+                    stream.unpipe(csvStream)
+                    resolve( csvStream.pause() );
+                }
+            )
+        }
+
+        function deleteObject() {
+            console.log('\ninside deleteObject\n');
+            return new Promise(
+                (resolve, reject) => {
+                    rawBatch.shift();
+                    addressMasterBatch.shift();
+                }
+            )
         }
 
         // Function to reset batches and resume data stream from file
         function resume(){
-            rawBatch = [];
-            addressMasterBatch = [];
             stream.pipe(csvStream);
             return csvStream.resume();
         } 

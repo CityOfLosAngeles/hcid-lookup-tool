@@ -1,6 +1,6 @@
 {
     "development": {
-        "username": "postgres",
+        "username": "Andrey",
         "password": "password",
         "database": "hcid-db",
         "dialect": "postgres",

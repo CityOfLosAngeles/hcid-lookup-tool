@@ -47,14 +47,20 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue: true
         }
-    },{
-            classMethods: {
-            associate: (models) => {
-                Bims.belongsTo(models.AddressMaster);
-            }
-        },
-        timestamps: false,
-		freezeTableName: true
+    },
+		{
+			classMethods:{
+				associate:  (models)  =>  {
+					Bims.belongsTo(models.AddressMaster,
+					{
+						foreignKey: {
+							allowNull: false
+							}
+						});
+				            }
+			        },
+			        timestamps:  false,
+			freezeTableName: true
     });
     return Bims;
 };
