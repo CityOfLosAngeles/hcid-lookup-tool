@@ -60,14 +60,20 @@ module.exports = {
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
+                console.log('\n$$$$$$$$$ Inside "on data" $$$$$$$$$');
                 if(!data[0].includes("HOUSING_PROGRAM")){
-                    runConstructors(cleanUpLine(data));
+                    console.log("^^^^^^ Inside if statement of 'on data' ^^^^^^");
+                    runConstructors( cleanUpLine(data) );
                 }
             })
             .on("end", function(){
-                // Last batch DB function goes here
                 console.log("done");
             });
+        
+        function runRawData(readableStream){
+            let tempData = new RawData(...readableStream);
+            rawBatch.push(tempData);
+        }
             
         function runAddressMaster(readableStream){
             let state = 'CA';
@@ -97,67 +103,30 @@ module.exports = {
             addressMasterBatch.push(tempAddress);
         }
 
-        function runRawData(readableStream){
-            let tempData = new RawData(...readableStream);
-            rawBatch.push(tempData);
-        }
-
-        function runConstructors(readableStream) {
+       function runConstructors(readableStream) {
+            console.log('####### Inside Run Constructors #######');
             runRawData(readableStream);
             runAddressMaster(readableStream);
-            checkAddress(rawBatch[0], addressMasterBatch[0]);
+            checkAddress( rawBatch[counter], addressMasterBatch[counter] );      
         }
-        
-        // function checkAddress(rawBatch, addressMasterBatch, callback ) {
+
         function checkAddress(rawBatchObject, addressMasterBatchObject) {
-            pause()
-                .then( () => {
-                    counter++;
-                    console.log(`**********************\nObject Counter: ${counter}\n***************************************************`);
-                    return addressController.createAddress8(addressMasterBatchObject, rawBatchObject);
-                })
-                .then( () => {
-                    deleteObject();
-                })
-                .then( () => {
-                    resume();
-                })
-                .catch( (error) => {
-                    console.error(error);
-                });
+            console.log(`********************** Object Counter: ${counter} **********************`);
+            console.log(addressMasterBatchObject);
+            counter++;
+            pause3();
+            addressController.createHims(addressMasterBatchObject, rawBatchObject, resume3);
+        }
+        
+        function pause3(){
+            csvStream.pause();
+            stream.unpipe(csvStream);  
         }
 
-        // Function to pause data stream from file
-        function pause() {
-            return new Promise(
-                (resolve, reject) => {
-                    stream.unpipe(csvStream)
-                    resolve( csvStream.pause() );
-                }
-            )
-        }
-
-        function deleteObject() {
-            console.log('\ninside deleteObject\n');
-            return new Promise(
-                (resolve, reject) => {
-                    rawBatch.shift();
-                    addressMasterBatch.shift();
-                }
-            )
-        }
-
-        // Function to reset batches and resume data stream from file
-        function resume(){
+        function resume3(){
+            csvStream.resume();
             stream.pipe(csvStream);
-            return csvStream.resume();
-        } 
-
-        // Runs the data stream through the csv parser
-        stream.pipe(csvStream);
-        
-        
+        }
         stream.pipe(csvStream);
     }
 }
-

@@ -34,7 +34,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }); // PASS THE CONFIG INTO MULTER
-// ***************************************************// 
 
 
 // ************* CSV Upload ***************** // 
@@ -48,7 +47,6 @@ router.post('/upload-data', upload.single('file'), (req, res) => {
     watchFolder();
     res.status(301).redirect('/upload');
 });
-// *******************************************//
 
 
 // ************** Handlebars Routes ****************** //
@@ -60,78 +58,63 @@ router.get('/upload', (req, res) => {
     res.render('upload');
 });
 
-router.post('/query', (req, res) => {
-
+router.get('/query', (req, res) => {
     let whereStatement = {};
-
-    if(req.body.street_num){
-        whereStatement.street_num = parseInt(req.body.street_num)
+    if(req.query.street_num){
+        whereStatement.street_num = parseInt(req.query.street_num)
     }
-    if(req.body.street_name){
-        whereStatement.street_name = req.body.street_name.toUpperCase()
+    if(req.query.street_name){
+        whereStatement.street_name = req.query.street_name.toUpperCase()
     }
-    if(req.body.zipcode){
-        whereStatement.zipcode = req.body.zipcode
+    if(req.query.zipcode){
+        whereStatement.zipcode = req.query.zipcode
     }
-
     db.AddressMaster.findAll({
         where: whereStatement,
-        include: [{model:db.Bims},{model:db.Hims}]
-    })
-    .then((result) => {
-        // let queryResult = {
-        //     info: result,
-        //     infoArrayLength: result[0].dataValues.Bims.length,
-        // };
-        // res.render('/search', queryResult);
-
-        result.map( (element) => console.log(element.dataValues))
+        include: [{model:db.Bims},{model:db.Hims},{model:db.Scep}]
+    }).then((result) => {
+        let queryResult = {
+            info: result
+        };
+        res.render('search', queryResult);
     });
 });
-// *************************************************** //
 
 
 // ************** Test routes (will be removed) ****************** //
 router.get('/bims', (req, res) => {
     require('./controllers/bims_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/hims', (req, res) => {
     require('./controllers/hims_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/prop-site', (req, res) => {
     require('./controllers/prop_site_address_controller.js').readData(app);
-    res.status(301).redirect('/');
-});
-
-router.get('/prop-unit', (req, res) => {
-    require('./controllers/prop_unit_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/rent', (req, res) => {
     require('./controllers/rent_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
 
 router.get('/scep', (req, res) => {
     require('./controllers/scep_controller.js').readData(app);
-    res.status(301).redirect('/');
+    res.status(301).redirect('/upload');
 });
+
+
 // ************************************************************** //
-
-
-
 app.use(router);
 app.use(function (req, res, next) {
     res.setTimeout(480000, function () { // 4 minute timeout adjust for larger uploads
         console.log('Request has timed out.');
         res.send(408);
     });
-
     next();
 });
 
