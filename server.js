@@ -76,7 +76,7 @@ router.post('/query', (req, res) => {
 
     db.AddressMaster.findAll({
         where: whereStatement,
-        include: [{model:db.Bims},{model:db.Hims}]
+        include: [{model:db.Bims},{model:db.Hims},{model:db.Scep}]
     })
     .then((result) => {
         // let queryResult = {
@@ -118,7 +118,7 @@ router.get('/rent', (req, res) => {
 });
 
 router.get('/scep', (req, res) => {
-    require('./controllers/scep_controller.js').readData(app);
+    require('./controllers/scep_iter_controller.js').readData(app);
     res.status(301).redirect('/');
 });
 // ************************************************************** //

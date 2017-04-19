@@ -155,9 +155,6 @@ module.exports = {
 
         // Runs the data stream through the csv parser
         stream.pipe(csvStream);
-        
-        
-        stream.pipe(csvStream);
     }
 }
 
