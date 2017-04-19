@@ -34,7 +34,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }); // PASS THE CONFIG INTO MULTER
-// ***************************************************// 
 
 
 // ************* CSV Upload ***************** // 
@@ -48,7 +47,6 @@ router.post('/upload-data', upload.single('file'), (req, res) => {
     watchFolder();
     res.status(301).redirect('/upload');
 });
-// *******************************************//
 
 
 // ************** Handlebars Routes ****************** //
@@ -61,9 +59,7 @@ router.get('/upload', (req, res) => {
 });
 
 router.get('/query', (req, res) => {
-
     let whereStatement = {};
-
     if(req.query.street_num){
         whereStatement.street_num = parseInt(req.query.street_num)
     }
@@ -73,40 +69,16 @@ router.get('/query', (req, res) => {
     if(req.query.zipcode){
         whereStatement.zipcode = req.query.zipcode
     }
-
     db.AddressMaster.findAll({
         where: whereStatement,
-        include: [{model:db.Bims},{model:db.Hims}]
+        include: [{model:db.Bims},{model:db.Hims},{model:db.Scep}]
     }).then((result) => {
-
         let queryResult = {
             info: result
         };
-
         res.render('search', queryResult);
     });
 });
-
-router.get('/testquery', (req, res) => {
-
-    let whereStatement = {
-        street_num: 1007,
-        street_name: 'WATSON',
-        zipcode: '90744'
-    };
-
-    db.AddressMaster.findAll({
-        where: whereStatement,
-        include: [{model:db.Bims},{model:db.Hims}]
-    }).then((result) => {
-        let queryResult = {
-            info: result
-        };
-
-        res.json(queryResult);
-    });
-});
-// *************************************************** //
 
 
 // ************** Test routes (will be removed) ****************** //
@@ -134,17 +106,15 @@ router.get('/scep', (req, res) => {
     require('./controllers/scep_controller.js').readData(app);
     res.status(301).redirect('/upload');
 });
+
+
 // ************************************************************** //
-
-
-
 app.use(router);
 app.use(function (req, res, next) {
     res.setTimeout(480000, function () { // 4 minute timeout adjust for larger uploads
         console.log('Request has timed out.');
         res.send(408);
     });
-
     next();
 });
 
