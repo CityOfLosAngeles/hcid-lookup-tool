@@ -1,5 +1,5 @@
 # HCID  - Lookup Tool 
-
+![img](https://www.dropbox.com/s/fjsyry8y98si1g9/Screen%20Shot%202017-04-19%20at%2010.13.39.png?dl=0)
 ## About
 
 Single Lookup Tool - The Department maintains over 8 different database and data sources (Excel & Access files) containing information about different rental properties. The Department often needs to lookup and attribute different programs to these units. This tool would consider of an unified ETL pipeline and deduplication service that allows staff to lookup properties and see which programs have been used, along with alternate addresses, etc. 
