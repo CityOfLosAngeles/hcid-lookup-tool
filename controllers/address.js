@@ -2,7 +2,7 @@ import db from '../models';
 const Sequelize = require('sequelize');
 
 module.exports = {
-
+  
     createBims: (newAddressObject, rawBatchObject, cb) => {
         return new Promise((resolve, reject) => {
             return db.sequelize.transaction((t) => {
@@ -167,6 +167,7 @@ module.exports = {
             });
         });
     }, // end of createSCEP
+
     createPropSite: (newAddressObject, rawBatchObject, cb) => {
         return new Promise((resolve, reject) => {
             return db.sequelize.transaction((t) => {

@@ -109,7 +109,6 @@ module.exports = {
             csvStream.resume();
             stream.pipe(csvStream);
         }
-
-        stream.pipe(csvStream); 
+        stream.pipe(csvStream);
     }
 }
