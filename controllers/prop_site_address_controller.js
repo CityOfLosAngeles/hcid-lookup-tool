@@ -1,5 +1,7 @@
 import fs from 'fs';
 import csv from 'fast-csv';
+import addressParser from 'parse-address';
+import addressController from './address.js';
 
 module.exports = {
     readData: (app) => {
@@ -138,7 +140,7 @@ module.exports = {
             console.log(addressMasterBatchObject);
             counter++;
             pause3();
-            addressController.createHims(addressMasterBatchObject, rawBatchObject, resume3);
+            addressController.createPropSite(addressMasterBatchObject, rawBatchObject, resume3);
         }
         
         function pause3(){
