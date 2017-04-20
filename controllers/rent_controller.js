@@ -1,12 +1,15 @@
 import fs from 'fs';
 import csv from 'fast-csv';
+import addressParser from 'parse-address';
+import addressController from './address.js';
+import Promise from 'bluebird';
 
 module.exports = {
     readData: (app) => {
         let stream = fs.createReadStream("./temp-data/rent.csv");
-        let batchSize = 1000;
         let rawBatch = [];
         let addressMasterBatch = [];
+        let counter = 0;
 
         function RawData(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13) {
             this.APN = c1;
@@ -35,55 +38,116 @@ module.exports = {
             this.zipcode = a8;
         }
 
-        // CLEANS EACH LINE, Replaces unwated , with spaces, replaces "," with , and removes " before and after each string
         let cleanUpLine = (data)=> {
                 let line = data.toString();
                 let cleanLine = line
                     .replace(/, /g, ' ')
                     .replace(/","/g, ',')
                     .replace(/"/g, '')
+                    .replace(/&/g, ' ')
                     .split(',')
                return cleanLine
         }
 
         let csvStream = csv({quote: null})
             .on("data", function(data){
-  
-                // runAddressMaster(data)
-                runRawData(cleanUpLine(data));
+                console.log('\n$$$$$$$$$ Inside "on data" $$$$$$$$$');
+                if( !data[0].includes("APN") ){ 
+                    console.log("^^^^^^ Inside if statement of 'on data' ^^^^^^");
+                    runConstructors( cleanUpLine(data) );
+                }
             })
             .on("end", function(){
-                // Last batch DB function goes here
                 console.log("done");
             });
-            
-        let runAddressMaster = (readableStream) => {
-            let rawPropAddress = readableStream[4].trim();
-            let rawCityStateZip = readableStream[5].trim();
-            let tempAddress = new AddressMaster();
-        }
 
-        let runRawData = (readableStream) => {
+        function runRawData(readableStream){
             let tempData = new RawData(...readableStream);
-            console.log(tempData);
             rawBatch.push(tempData);
-            if(rawBatch.length % batchSize === 0){
-                pause();
-                resume();
+        }
+
+        function addressParse(rawPropAddress){
+            let splitPropAddress = rawPropAddress.split(' ');
+            // Parses Address using parse-address module
+            let addressObject = addressParser.parseLocation(rawPropAddress);
+
+            // Shaves off street number as first step to find apartment unit info 
+            let splitNum = splitPropAddress.indexOf(addressObject.number);
+            splitPropAddress.splice(splitNum, 1);
+
+            // If direction (North, South, East, West) is part of address, assigns it, otherwise makes it null
+            let addressDirection;
+            if(addressObject.prefix !== undefined){
+                addressDirection = addressObject.prefix;
+                splitPropAddress.shift();
+            } else {
+                addressDirection = null;
             }
+
+            // Loop to shave off street name to find apartment unit info
+            let splitParsedName = addressObject.street.split(' ');
+            for (var i = 0, x = splitParsedName.length; i < x; i++) {
+                let splitName = splitPropAddress.indexOf(splitParsedName[i]);
+                splitPropAddress.splice(splitName, 1);
+            }
+
+            // Shaves off type of road to find apartment unit info
+            let splitType = splitPropAddress.indexOf(addressObject.type);
+            splitPropAddress.splice(splitType, 1);
+
+            // Aparment unit info is what's left in array, assigns it to addressUnit if it exists, otherwise makes it null
+            let addressUnit = splitPropAddress.join(' ');
+            if(!addressUnit){addressUnit = null;}
+
+            addressObject.number = parseInt(addressObject.number);
+
+            let parsedAddress = [addressDirection, addressUnit, addressObject];
+
+            return parsedAddress;
+        }
+            
+        function runAddressMaster(readableStream){
+            let rawCity = null;
+            let rawState = 'CA';
+            let rawZipcode = readableStream[10].split(' ').pop();
+            let rawDirection,
+                rawUnit,
+                addressObject;
+
+            [rawDirection, rawUnit, addressObject] = addressParse(readableStream[1]);
+
+            if(!addressObject.type && addressObject){addressObject.type = null;}
+            if(!addressObject.number && addressObject){addressObject.number = null;}
+
+            let tempAddress = new AddressMaster(addressObject.number, addressObject.street, addressObject.type, rawDirection, rawUnit, rawCity, rawState, rawZipcode);
+            addressMasterBatch.push(tempAddress);
         }
 
-        function pause(){
-            stream.unpipe(csvStream);
-            return csvStream.pause();
+        function runConstructors(readableStream) {
+            console.log('####### Inside Run Constructors #######');
+            runRawData(readableStream);
+            runAddressMaster(readableStream);
+            checkAddress( rawBatch[counter], addressMasterBatch[counter] );      
         }
 
-        function resume(){
-            rawBatch = [];
-            addressMasterBatch = [];
+        function checkAddress(rawBatchObject, addressMasterBatchObject) {
+            console.log(`********************** Object Counter: ${counter} **********************`);
+            console.log(addressMasterBatchObject);
+            counter++;
+            pause3();
+            addressController.createRent(addressMasterBatchObject, rawBatchObject, resume3);
+        }
+        
+        function pause3(){
+            csvStream.pause();
+            stream.unpipe(csvStream);  
+        }
+
+        function resume3(){
+            csvStream.resume();
             stream.pipe(csvStream);
-            return csvStream.resume();
-        } 
-        stream.pipe(csvStream);
+        }
+
+        stream.pipe(csvStream);        
     }
 }
