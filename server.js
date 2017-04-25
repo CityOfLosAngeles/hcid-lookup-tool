@@ -71,7 +71,7 @@ router.get('/query', (req, res) => {
     }
     db.AddressMaster.findAll({
         where: whereStatement,
-        include: [{model:db.Bims},{model:db.Hims},{model:db.Scep}]
+        include: [{model:db.Bims},{model:db.Hims},{model:db.Scep}, {model:db.Rent}, {model:db.Prop_site_address}]
     }).then((result) => {
         let queryResult = {
             info: result
