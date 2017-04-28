@@ -52,6 +52,11 @@ body {
 	float: right;
 }
 
+#uploadButton {
+	position: relative;
+    right: -20px;
+}
+
 #file {
 	margin: 20px 0 0 -87px;
 	color: #fff;
