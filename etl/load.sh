@@ -3,7 +3,7 @@
 # stop if error
 set -e 
 
-DIR_NAME = $1
+DIR_NAME=$1
 
 # Run CSVclean to clean the datasets
 for file in ./$DIR_NAME/*; do
@@ -20,7 +20,7 @@ wait #until processes are done.
 # insert into postgres
 for clean_file in ./$DIR_NAME/*_out.csv; do
   echo "Inserting " $clean_file
-  csvsql --db postgresql:///hcid-disp --prefix REPLACE --insert $clean_file
+  csvsql --db postgresql:///hcid-disp  --insert $clean_file
   echo "Finished " $clean_file
 done
 
