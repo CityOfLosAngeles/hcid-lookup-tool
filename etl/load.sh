@@ -26,5 +26,6 @@ done
 rm ./data/*_out.csv
 rm ./data/*_err.csv
 
+# create a view with all APNs in the same rows. Full outer join style
 psql -d hcid-disp -a -f ./etl/join.sql
 

@@ -61,6 +61,7 @@ Additionally, you'll need to install csvkit. Run `pip install csvkit` to install
 
 Run `etl/load.sh` from the project root dir and it should create the data tables and run the join query for the APN master table. 
 
+Tested using ZSH on Ubuntu and OSX. 
 ## Data Sources
 
 HIMS
