@@ -156,6 +156,7 @@ module.exports = {
                     .catch( (error) => console.error('\nerror in create', error) );
                 })
                 .catch((error) => console.error('findOrCreate Master Address didn\'t work'));
+
             })
             .then( (result) => { 
                 resolve(result);
@@ -166,6 +167,7 @@ module.exports = {
                 reject(error);
             });
         });
+
     }, // end of createSCEP
 
     createPropSite: (newAddressObject, rawBatchObject, cb) => {
@@ -208,5 +210,6 @@ module.exports = {
             });
         });
     } // end of createPropSite
+
 
 } // end of MODULE
