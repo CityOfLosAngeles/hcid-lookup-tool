@@ -17,6 +17,15 @@ Luz Santiago
 
 UCLA
 
+
+## Demo Videos
+
+[HCID file processing demo](http://www.youtube.com/watch?v=BHbRR9wnzD0)
+
+[HCID upload demo](http://www.youtube.com/watch?v=pYN1qi4-kh0)
+
+[HCID search demo](http://www.youtube.com/watch?v=fJ-0yVI8Ywo)
+
 ## City Team
 
 Grace Benedicto
