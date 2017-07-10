@@ -1,0 +1,165 @@
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href=# class="brand-logo center">HCID Lookup Tool</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/search">Search</a></li>
+                <li><a href="/upload">Upload</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="row search-box">
+    <form class="col s12" action="/query" method="GET">
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="street_num" type="text" name="street_num">
+                <label for="street_num">Street Number</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="street_name" type="text" name="street_name">
+                <label for="street_name">Street Name</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="zipcode" type="text" name="zipcode">
+                <label for="zipcode">Zipcode</label>
+            </div>
+            <div class="col s3">
+                <input class="btn search-btn" type="submit" value="Search">
+            </div>
+        </div>
+    </form>
+</div>
+
+{{#each info}}
+    {{#if is_active}}
+        <div class="result-box">
+            <h1 class="result-header">{{street_num}} {{street_dir_cd}} {{street_name}} {{street_type}} {{zipcode}}</h1>
+
+            <div class="data-box">
+                <h2 class="data-header">Bims Data</h2>
+                {{#each Bims}}
+                    <div class="list-div">
+                        <ul class="data-list">
+                            <li>Statement Date: <span class="data-text">{{StatementDate}}</span></li>
+                            <li>APN: <span class="data-text">{{APN}}</span></li>
+                            <li>Property Address: <span class="data-text">{{Property_Address}}</span></li>
+                            <li>City, State, Zipcode: <span class="data-text">{{Property_City_State_Zip}}</span></li>
+                            <li>RSO Exemptions: <span class="data-text">{{RSO_Exemptions}}</span></li>
+                        </ul>
+                        <ul class="data-list">
+                            <li>SCEP Exemptions: <span class="data-text">{{SCEP_Exmpetions}}</span></li>
+                            <li>Total Units: <span class="data-text">{{Total_Units}}</span></li>
+                            <li>RSO Units Billed: <span class="data-text">{{RSO_Units_Billed}}</span></li>
+                            <li>SCEP Units Billed: <span class="data-text">{{SCEP_Units_Billed}}</span></li>
+                        </ul>           
+                    </div>
+                {{/each}}         
+            </div>
+
+            <div class="data-box">
+                <h2 class="data-header">Hims Data</h2>
+                {{#each Hims}}
+                    <div class="list-div">
+                        <ul class="data-list">
+                            <li>Housing Program: <span class="data-text">{{HOUSING_PROGRAM}}</span></li>
+                            <li>Project Unique ID: <span class="data-text">{{ProjUniqueID}}</span></li>
+                            <li>Project Number: <span class="data-text">{{ProjectNo}}</span></li>
+                            <li>Project Status: <span class="data-text">{{PROJECT_STATUS}}</span></li>
+                            <li>Project Info: <span class="data-text">{{PROJECT_INFO}}</span></li>
+                            <li>APN: <span class="data-text">{{APN}}</span></li>
+                            <li>House ID: <span class="data-text">{{HouseId}}</span></li>
+                            <li>House Number: <span class="data-text">{{HouseNum}}</span></li>
+                            <li>House Fraction Number: <span class="data-text">{{HouseFracNum}}</span></li>
+                        </ul>
+                        <ul class="data-list">
+                            <li>Council District: <span class="data-text">{{CouncilDistrict}}</span></li>
+                            <li>Street Direciton: <span class="data-text">{{PreDirCd}}</span></li>
+                            <li>Street Name: <span class="data-text">{{StreetName}}</span></li>
+                            <li>Street Type: <span class="data-text">{{StreetTypeCd}}</span></li>
+                            <li>Unit Range: <span class="data-text">{{UnitRange}}</span></li>
+                            <li>Unit Number: <span class="data-text">{{Unit_Number}}</span></li>
+                            <li>Zipcode: <span class="data-text">{{ZipCode}}</span></li>
+                            <li>City: <span class="data-text">{{City}}</span></li>
+                        </ul>           
+                    </div>
+                {{/each}}        
+            </div>
+
+            <div class="data-box">
+                <h2 class="data-header">Property Site Address Data</h2>
+                {{#each Prop_site_addresses}}
+                    <div class="list-div">
+                        <ul class="data-list">
+                            <li>APN: <span class="data-text">{{Apn}}</span></li>
+                            <li>Council District: <span class="data-text">{{CouncilDistrict}}</span></li>
+                            <li>Census Tract 2010: <span class="data-text">{{CenTract2010}}</span></li>
+                            <li>Community Name: <span class="data-text">{{CommunityName}}</span></li>
+                            <li>State Assembly District: <span class="data-text">{{StateAssemDist}}</span></li>
+                        </ul>
+                        <ul class="data-list">
+                            <li>State Senate District: <span class="data-text">{{StateSenDist}}</span></li>
+                            <li>US Congress District: <span class="data-text">{{UsCongDist}}</span></li>
+                            <li>County Sup District Number: <span class="data-text">{{CountySupDistNum}}</span></li>
+                            <li>Community Plan Area ID: <span class="data-text">{{CommunityPlanAreaID}}</span></li>
+                            <li>Neighborhood Council ID: <span class="data-text">{{NeighborhoodCouncilID}}</span></li>
+                        </ul>           
+                    </div>
+                {{/each}}        
+            </div>
+
+            <div class="data-box">
+                <h2 class="data-header">Rent Data</h2>
+                {{#each Rents}}
+                    <div class="list-div">
+                        <ul class="data-list">
+                            <li>APN: <span class="data-text">{{APN}}</span></li>
+                            <li>Property Address: <span class="data-text">{{Property_Address}}</span></li>
+                            <li>Service Date: <span class="data-text">{{Service_Date}}</span></li>
+                            <li>Land Use Code: <span class="data-text">{{Land_Use_Code}}</span></li>
+                            <li>Unit Count: <span class="data-text">{{Unit_Count}}</span></li>
+                            <li>Exempted Units: <span class="data-text">{{Exempted_Units}}</span></li>
+                        </ul>
+                        <ul class="data-list">
+                            <li>RSO Units: <span class="data-text">{{RSO_Units}}</span></li>
+                            <li>Year Built: <span class="data-text">{{Year_Built}}</span></li>
+                            <li>Category: <span class="data-text">{{Category}}</span></li>
+                            <li>Secondary Address: <span class="data-text">{{Secondary_Address}}</span></li>
+                            <li>House ID: <span class="data-text">{{houseID}}</span></li>
+                        </ul>           
+                    </div>
+                {{/each}}        
+            </div>
+
+            <div class="data-box">
+                <h2 class="data-header">SCEP Data</h2>
+                {{#each Sceps}}
+                    <div class="list-div">
+                        <ul class="data-list">
+                            <li>Prop ID: <span class="data-text">{{propID}}</span></li>
+                            <li>Perm Exemptions: <span class="data-text">{{PermExemptions}}</span></li>
+                            <li>Total Exemptions: <span class="data-text">{{TotalExemptions}}</span></li>
+                            <li>Council District Number: <span class="data-text">{{councilDistrictNo}}</span></li>
+                            <li>Census Tract: <span class="data-text">{{censusTract}}</span></li>
+                            <li>Year Built: <span class="data-text">{{yearBuilt}}</span></li>
+                            <li>Units: <span class="data-text">{{units}}</span></li>
+                            <li>APN: <span class="data-text">{{APN}}</span></li>
+                        </ul>
+                        <ul class="data-list">
+                            <li>Land Use Desc: <span class="data-text">{{landUseDesc}}</span></li>
+                            <li>Code District: <span class="data-text">{{CodeDistrict}}</span></li>
+                            <li>Code District ID: <span class="data-text">{{CodeDistrictID}}</span></li>
+                            <li>House Number: <span class="data-text">{{HouseNum}}</span></li>
+                            <li>Street Name: <span class="data-text">{{StreetName}}</span></li>
+                            <li>Property Address: <span class="data-text">{{Property_Address}}</span></li>
+                            <li>Street Direction: <span class="data-text">{{StreetDirection}}</span></li>
+                            <li>Flag Deleted: <span class="data-text">{{FlgDeleted}}</span></li>
+                        </ul>           
+                    </div>
+                {{/each}}        
+            </div>
+
+        </div>
+    {{/if}}
+{{/each}}

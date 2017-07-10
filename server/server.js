@@ -12,9 +12,9 @@ const app = express();
 const PORT = process.env.PORT || 6060;
 
 // Handlebars Config //
-app.use(express.static(process.cwd() + "/public"));
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// app.use(express.static(process.cwd() + "/public"));
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
 
 // Body Parser config //
 app.use(bodyParser.json());
@@ -34,24 +34,24 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }); // PASS THE CONFIG INTO MULTER
+// ************** React Routes ****************** //
+app.use(express.static(path.resolve('build')));
 
+// Always return the main index.html, so react-router render the route in the client
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve('build', 'index.html'));
+});
 
 // ************* CSV Upload ***************** //
 router.get('/', (req, res) => {
     checkFolder('uploads');
     checkFolder('temp-data');
-    res.redirect('/search');
+    // res.redirect('/search');
 });
 
 router.post('/upload-data', upload.single('file'), (req, res) => {
     watchFolder();
     res.status(301).redirect('/upload');
-});
-
-
-// ************** Handlebars Routes ****************** //
-router.get('/search', (req, res) => {
-    res.render('search');
 });
 
 router.get('/upload', (req, res) => {
@@ -76,8 +76,7 @@ router.get('/query', (req, res) => {
         let queryResult = {
             info: result
         };
-        res.header("Access-Control-Allow-Origin","*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        console.log("Query run");
         res.json(queryResult);
     });
 });
@@ -112,6 +111,9 @@ router.get('/scep', (req, res) => {
 
 // ************************************************************** //
 app.use(router);
+
+
+
 app.use(function (req, res, next) {
     res.setTimeout(480000, function () { // 4 minute timeout adjust for larger uploads
         console.log('Request has timed out.');
