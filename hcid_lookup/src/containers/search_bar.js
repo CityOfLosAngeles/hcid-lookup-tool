@@ -1,18 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Input, Icon } from 'react-materialize';
+import {bindActionCreators} from 'redux';
+import {fetchCity} from '../actions/index';
 
 class SearchBar extends Component {
   constructor(props){
     super(props);
+    this.onInputChange= this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.state = { term: ''};
+  }
 
-    this.state = { address: ''};
+  onInputChange(event){
+    console.log(event.target.value);
+    this.setState({term:event.target.value});
+  }
+
+  onFormSubmit(event){
+    event.preventDefault();
+    this.props.fetchCity(this.state.term);
+    this.setState({term:''});
+
   }
 
   render() {
     return (
       <Row>
-	      <Input s={12} label="Search" className="input-field" validate><Icon>search</Icon></Input>
+        <form onSubmit={this.onFormSubmit} className="input-group">
+	      <Input
+          s={12}
+          label="Enter Address"
+          className="input-field"
+          value={this.state.term}
+          onChange={this.onInputChange}
+          validate>
+          <Icon>search</Icon>
+        </Input>
+        <span><button type="submit" className="btn btn-secondary">Search</button>
+      </span>
+      </form>
       </Row>
       /* <div className="nav-wrapper">
         <form>
@@ -28,11 +55,11 @@ class SearchBar extends Component {
     );
   }
 
-  onInputChange(address) {
-    this.setState({address});
-    this.props.onSearchTermChange(address);
-  }
 
 }
 
-export default SearchBar;
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchCity},dispatch);
+}
+
+export default connect(null,mapDispatchToProps)(SearchBar);
