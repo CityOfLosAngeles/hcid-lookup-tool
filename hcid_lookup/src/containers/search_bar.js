@@ -38,6 +38,7 @@ class SearchBar extends Component {
           <Icon>search</Icon>
         </Input>
         <span><button type="submit" className="btn btn-secondary">Search</button>
+        <button type="submit" className="btn waves-effect waves-light red ">Clear</button>
       </span>
       </form>
       </Row>
