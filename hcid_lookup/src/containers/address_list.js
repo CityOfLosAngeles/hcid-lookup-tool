@@ -8,8 +8,6 @@ class AddressList extends Component {
   constructor(props){
     super(props);
     this.state = {term:''}
-
-
   }
 
   renderList = () => {
@@ -21,26 +19,20 @@ class AddressList extends Component {
       return(
         <div 
         key={detail.id} 
-        className="list-group-item card-panel hoverable" 
+        className="list-group-item card-panel hoverable address-list-title" 
         onClick={()=>this.props.dispatch(selectAddress(detail))}>
-
           {detail.street_num} {detail.street_name}, {detail.city} {detail.zipcode}
-
         </div>
       );
     });
-
-
   }
-
 
   render(){
     console.log(this.props.addresses);
     return(
-      <div className="col s4">
+      <div className="flow-text">
         <SearchBar />
         {this.renderList()}
-
       </div>
     );
   };
@@ -57,7 +49,5 @@ function mapStateToProps(state) {
 //   //to all of our reducers
 //   return bindActionCreators({ selectAddress: selectAddress}, dispatch)
 // }
-
-
 
 export default connect(mapStateToProps)(AddressList);

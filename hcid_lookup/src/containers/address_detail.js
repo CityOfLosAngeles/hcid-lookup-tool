@@ -7,20 +7,14 @@ import Rent from './detail_sub/rent';
 import Scep from './detail_sub/scep';
 
 class AddressDetail extends Component {
-  
-
-
   render(){
-  	
   	if (!this.props.activeAddress){
-		return <div onClick={()=>console.log(this.props.activeAddress)}>Select an Address to get started
-		
-		</div>
-		
+		return (
+			<div onClick={()=>console.log(this.props.activeAddress)}>Select an Address to get started</div>
+		)
 	}
 	
     return(
-
       <div onClick={()=>console.log(this.props.activeAddress)}>
 	      <Hims/>
 	      <Bims/>
@@ -28,19 +22,14 @@ class AddressDetail extends Component {
 	      <Rent/>
 	      <Scep/>
       </div>
-
     );
-    
   };
 }
-
 
 function mapStatetoProps(state){
 	return{
 		activeAddress: state.addresses.selected
 	};
 }
-
-
 
 export default connect(mapStatetoProps)(AddressDetail); 

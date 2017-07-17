@@ -5,62 +5,46 @@ import {bindActionCreators} from 'redux';
 import {fetchCity} from '../actions/index';
 
 class SearchBar extends Component {
-  constructor(props){
-    super(props);
-    this.onInputChange= this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.state = { term: ''};
-  }
+    constructor(props){
+        super(props);
+        this.onInputChange= this.onInputChange.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.state = { term: ''};
+    }
 
-  onInputChange(event){
-    console.log(event.target.value);
-    this.setState({term:event.target.value});
-  }
+    onInputChange(event){
+        console.log(event.target.value);
+        this.setState({term:event.target.value});
+    }
 
-  onFormSubmit(event){
-    event.preventDefault();
-    this.props.fetchCity(this.state.term);
-    this.setState({term:''});
+    onFormSubmit(event){
+        event.preventDefault();
+        this.props.fetchCity(this.state.term);
+        this.setState({term:''});
+    }
 
-  }
-
-  render() {
-    return (
-      <Row>
-       
-        <form onSubmit={this.onFormSubmit} className="input-group">
-	      <Input
-          s={12}
-          label="Enter Address"
-          className="input-field"
-          value={this.state.term}
-          onChange={this.onInputChange}
-          validate>
-          <Icon>search</Icon>
-        </Input>
-        <span><button type="submit" className="btn waves-effect waves-light btn-secondary">Search</button> </span>
-         <span><button type="submit" className="btn waves-effect waves-light red ">Clear</button> </span>
-        </form>
-      </Row>
-      /* <div className="nav-wrapper">
-        <form>
-          <div className="input-field">
-            <i className="material-icons prefix">search</i>
-            <input id="search" value = {this.state.term}
-               />
-            <label className="label-icon" for="search"></label> */
-            /* <i className="material-icons">close</i> */
-          /* </div>
-        </form>
-      </div> */
-    );
-  }
-
-
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit} className="input-group">
+                    <div className="input-field">
+                        <input id="search" className="search-input" type="search" placeholder="Enter Address" 
+                        value={this.state.term} onChange={this.onInputChange} validate></input>
+                        <label className="label-icon" for="search"><i className="material-icons">search</i></label>
+                    </div>
+                    <div className="search-buttons">
+                        
+                        <span><button type="submit" className="btn waves-effect waves-light btn-secondary">Search</button></span>
+                        <span><button type="submit" className="btn waves-effect waves-light red search-button-clear">Clear</button> </span>
+                    </div>
+                </form>
+            </div>
+        );
+    }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchCity},dispatch);
+    return bindActionCreators({fetchCity},dispatch);
 }
 
 export default connect(null,mapDispatchToProps)(SearchBar);

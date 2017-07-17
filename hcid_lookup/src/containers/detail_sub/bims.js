@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import styles from './styles.css';
 
 class Bims extends Component {
-	
-
-
 	render(){
 			if(!this.props.selected|| this.props.selected.length===0){
 				return(
@@ -18,41 +16,37 @@ class Bims extends Component {
 
 		return(
 			<div className="hims_data">
-			  <h3>BIMS Data</h3>
-			  <table className="responsive-table striped bordered hoverable">
-				  <thead>
-				     <tr>
-				     	 <th>Property Address</th>
-				         <th>Statement Date</th>
-				         <th>APN</th>		         
-				         <th>RSO Exemptions</th>
-				         <th>SCEP Exemptions</th>
-				         <th>Total Units</th>
-				         <th>RSO Units Billed</th>
-				         <th>SCEP Units Billed</th>
-				     </tr>
-				  </thead>
-				  <tbody>
-				     <tr>
-		         		 <td>{data.Property_Address} {data.Property_City_State_Zip}</td>
-				         <td>{data.StatementDate}</td>
-				         <td>{data.APN}</td>
-				         <td>{data.RSO_Exemptions}</td>
-				         <td>{data.SCEP_Exmpetions}</td>
-				         <td>{data.Total_Units}</td>
-				         <td>{data.RSO_Units_Billed}</td>
-				         <td>{data.SCEP_Units_Billed}</td>
-
-				     </tr>
-				   </tbody>
-			  </table>
+				<p className="detail-title">BIMS Data</p>
+				<table className="responsive-table striped bordered hoverable">
+					<thead>
+					     <tr>
+					     	 <th>Property Address</th>
+					         <th>Statement Date</th>
+					         <th>APN</th>		         
+					         <th>RSO Exemptions</th>
+					         <th>SCEP Exemptions</th>
+					         <th>Total Units</th>
+					         <th>RSO Units Billed</th>
+					         <th>SCEP Units Billed</th>
+					     </tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{data.Property_Address} {data.Property_City_State_Zip}</td>
+							<td>{data.StatementDate}</td>
+							<td>{data.APN}</td>
+							<td>{data.RSO_Exemptions}</td>
+							<td>{data.SCEP_Exmpetions}</td>
+							<td>{data.Total_Units}</td>
+							<td>{data.RSO_Units_Billed}</td>
+							<td>{data.SCEP_Units_Billed}</td>
+				    	</tr>
+					</tbody>
+				</table>
 			</div>
 		);
 	}
-
 }
-
-
 
 function mapStatetoProps(state){
 	return{

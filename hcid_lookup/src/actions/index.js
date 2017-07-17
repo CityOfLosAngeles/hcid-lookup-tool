@@ -10,6 +10,14 @@ export function fetchCity(city){
 	//const url = `${ROOT_URL}&q=${city},us`;
   //const streetNumber = city.streetNumber;
   //const streetName = city.streetName;
+
+  // Edge case if user enters no value for search parameters
+  if(city===''){
+  	return{
+  		type:null,
+  		payload: null
+  	}
+  }
   const zipcode = city;
 
   const url =`${API_URL}${zipcode}`;

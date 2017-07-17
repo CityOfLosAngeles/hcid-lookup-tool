@@ -1,24 +1,28 @@
-.App {
-  text-align: center;
+
+.header-logo {
+	height: 60px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.header-title {
+  /*font-size: 3em;*/
+  margin: 0px;
+  padding-left: 10px;
+  font-family: Helvetica, Arial,sans-serif;
+  font-weight: bold;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.address-list-title {
+	font-size: 0.70em;
 }
 
-.App-intro {
-  font-size: large;
+.search-buttons {
+	text-align: right;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.search-button-clear {
+	margin-left: 10px;
+}
+
+.search-input {
+	margin-bottom: 10px !important;
 }
