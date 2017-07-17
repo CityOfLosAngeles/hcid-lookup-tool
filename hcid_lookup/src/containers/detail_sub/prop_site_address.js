@@ -15,10 +15,10 @@ class PropertySiteAddress extends Component {
 		const data = this.props.selected;
 
 		return(
-			<div className="hims_data">
+			<div className="hims_data hoverable">
 				<p className="detail-title">Property Site Address Data</p>
-				<table className="responsive-table striped bordered hoverable">
-				  <thead>
+				<table className="responsive-table striped bordered">
+					<thead>
 						<tr>
 							<th>APN</th>
 							<th>Council District</th>
@@ -31,8 +31,8 @@ class PropertySiteAddress extends Component {
 							<th>Community Plan Area ID</th>
 							<th>Neighborhood Council ID</th>
 						</tr>
-				  </thead>
-				  <tbody>
+					</thead>
+					<tbody>
 						<tr>
 							<td>{data.Apn}</td>
 							<td>{data.CouncilDistrict}</td>
@@ -45,7 +45,7 @@ class PropertySiteAddress extends Component {
 							<td>{data.CommunityPlanAreaID}</td>
 							<td>{data.NeighborhoodCouncilID}</td>
 						</tr>
-				   </tbody>
+					</tbody>
 				</table>
 			</div>
 		);

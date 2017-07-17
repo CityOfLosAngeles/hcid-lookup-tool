@@ -15,9 +15,9 @@ class Scep extends Component {
 		const data = this.props.selected;
 
 		return(
-			<div className="hims_data">
+			<div className="hims_data hoverable">
 				<p className="detail-title">SCEP Data</p>
-				<table className="responsive-table striped bordered hoverable">
+				<table className="responsive-table striped bordered">
 					<thead>
 						<tr>
 							<th>PropID</th>

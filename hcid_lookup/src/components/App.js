@@ -19,7 +19,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="col s8">
-                    <span className="flow-text"><AddressDetail /></span>
+                    <span className=""><AddressDetail /></span>
                 </div>
             </div>
         );
