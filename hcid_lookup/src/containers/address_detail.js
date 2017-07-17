@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Hims from './detail_sub/hims';
 import Bims from './detail_sub/bims';
+import Prop from './detail_sub/prop_site_address';
+import Rent from './detail_sub/rent';
+import Scep from './detail_sub/scep';
 
 class AddressDetail extends Component {
   
@@ -18,9 +21,12 @@ class AddressDetail extends Component {
 	
     return(
 
-      <div onClick={()=>console.log(this.props.activeAddress)}>Address details
-      <h3>Property Data</h3>
-      <Hims/>
+      <div onClick={()=>console.log(this.props.activeAddress)}>
+	      <Hims/>
+	      <Bims/>
+	      <Prop/>
+	      <Rent/>
+	      <Scep/>
       </div>
 
     );

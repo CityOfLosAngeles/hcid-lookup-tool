@@ -2,75 +2,66 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 class Hims extends Component {
-	
-/*	//We want Specific these Information from Him
-	{
-		Housing program
-		project unique id
-		project No
-		Project Status
-		Project Information
-		APN
-		House id
-		house Number
-		house farc
-		council district
-		pre directory cd
-		street name
-		street type cd
-		post dir cd
-		unit range
-		unit Number
-		zipcode
-		city
-	}*/
+
  		
 	render(){
-		if(!this.props.selected) return;
-		console.log(this.props.selected);
-		const APN = this.props.selected.Hims[0].APN;
-		console.log("apm"+APN);
+			if(!this.props.selected|| this.props.selected.length===0){
+				return(
+					<div>
+						<h5>No HIMS data on record </h5>
+					</div>
+				)	
+			}
+
+		const data = this.props.selected;
+
 		return(
-			  <div className="property-data">
-				  
-			      <table className="responsive-table striped bordered hoverable">
-			      <thead>
-			         <tr>
-			         <th>Student</th><th>Class</th><th>Data #1</th>
-			         <th>{APN}</th><th>Data #3</th><th>Data #4</th>
-			         <th>Data #5</th><th>Data #6</th><th>Data #7</th>
-			         <th>Data #8</th><th>Data #9</th><th>Data #10</th>
-			         </tr>
-			      </thead>
-			      <tbody>
-			         <tr>
-			         <td>Mahesh Parashar</td><td>VI</td><td>10</td>
-			         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-			         <td>16</td><td>17</td><td>19</td><td>20</td>
-			         </tr>
-			         <tr>
-			         <td>Rahul Sharma</td><td>VI</td><td>10</td>
-			         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-			         <td>16</td><td>17</td><td>19</td><td>20</td>
-			         </tr>
-			         <tr><td>Mohan Sood</td><td>VI</td><td>10</td>
-			         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-			         <td>16</td><td>17</td><td>19</td><td>20</td>
-			         </tr>
-			       </tbody>
-			       </table>
-			  </div>
-		
+			<div className="hims_data">
+			  <h3>HIMS Data</h3>
+			  <table className="responsive-table striped bordered hoverable">
+				  <thead>
+				     <tr>
+				         <th>Address</th>
+				         <th>City</th>
+				         <th>Zipcode</th>
+				         <th>Housing Program</th>
+				         <th>Project ID</th>
+				         <th>Project #</th>
+				         <th>Status</th>
+				         <th>Project Info</th>
+				         <th>APN</th>
+				         <th>House Frac Number</th>
+				         <th>Council District</th>
+				         <th>Pre Directory CD</th>
+				     </tr>
+				  </thead>
+				  <tbody>
+				     <tr>
+				         <td>{data.HouseNum} {data.StreetName} {data.StreetTypeCd}</td>
+				         <td>{data.City}</td>
+				         <td>{data.ZipCode}</td>
+				         <td>{data.HOUSING_PROGRAM}</td>
+				         <td>{data.ProjUniqueID}</td>
+				         <td>{data.ProjectNo}</td>
+				         <td>{data.PROJECT_STATUS}</td>
+				         <td>{data.PROJECT_INFO}</td>
+				         <td>{data.APN}</td>
+				         <td>{data.HouseFracNum}</td>
+				         <td>{data.CouncilDistrict}</td>
+				         <td>{data.PreDirCd}</td>
+				     </tr>
+				   </tbody>
+			  </table>
+			</div>
 		);
 	}
-
 }
 
 
 
 function mapStatetoProps(state){
 	return{
-		selected : state.addresses.selected
+		selected : state.addresses.selected.Hims[0]
 	};
 }
 

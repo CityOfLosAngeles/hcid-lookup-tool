@@ -15,8 +15,8 @@ class App extends Component {
         </div>
         <div className="App row">
           <div class="col s5 push-s7"><span class="flow-text"><AddressList /></span></div>
-          <div class="col s7 pull-s5"><span class="flow-text"><AddressDetail /></span></div>
         </div>
+          <div class="col s7 pull-s5"><span class="flow-text"><AddressDetail /></span></div>
       </div>
     );
   }

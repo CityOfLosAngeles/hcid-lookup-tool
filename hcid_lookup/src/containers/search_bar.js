@@ -27,6 +27,7 @@ class SearchBar extends Component {
   render() {
     return (
       <Row>
+       
         <form onSubmit={this.onFormSubmit} className="input-group">
 	      <Input
           s={12}
@@ -37,10 +38,9 @@ class SearchBar extends Component {
           validate>
           <Icon>search</Icon>
         </Input>
-        <span><button type="submit" className="btn btn-secondary">Search</button>
-        <button type="submit" className="btn waves-effect waves-light red ">Clear</button>
-      </span>
-      </form>
+        <span><button type="submit" className="btn waves-effect waves-light btn-secondary">Search</button> </span>
+         <span><button type="submit" className="btn waves-effect waves-light red ">Clear</button> </span>
+        </form>
       </Row>
       /* <div className="nav-wrapper">
         <form>

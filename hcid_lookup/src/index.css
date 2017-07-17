@@ -19,3 +19,7 @@ input[type=text]:focus {
 .property-data{
 	width:75px;
 }
+
+#hims_data{
+	width:30%;
+}
