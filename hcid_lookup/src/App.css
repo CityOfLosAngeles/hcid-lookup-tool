@@ -1,3 +1,6 @@
+.header-city-logo {
+	height: 60px;
+}
 
 .header-logo {
 	height: 60px;
@@ -9,6 +12,11 @@
   padding-left: 10px;
   font-family: Helvetica, Arial,sans-serif;
   font-weight: bold;
+}
+
+.header-row {
+	padding: 5px;
+	border-bottom: 1px solid #e8e8e8;
 }
 
 .address-list-title {
@@ -26,4 +34,8 @@
 
 .search-input {
 	margin-bottom: 10px !important;
+}
+
+.address-list {
+	border-right: 2px solid black;
 }
