@@ -5,6 +5,8 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-geosuggest": "^2.3.6",
+    "react-google-autocomplete": "^1.0.13",
     "react-materialize": "^1.0.3",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
