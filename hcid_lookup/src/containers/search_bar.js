@@ -3,18 +3,23 @@ import { connect } from 'react-redux';
 import { Row, Input, Icon } from 'react-materialize';
 import {bindActionCreators} from 'redux';
 import {fetchCity} from '../actions/index';
+import Geosuggest from 'react-geosuggest';
+import Autocomplete from 'react-google-autocomplete';
 
 class SearchBar extends Component {
     constructor(props){
         super(props);
         this.onInputChange= this.onInputChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
+    
         this.state = { term: ''};
     }
 
-    onInputChange(event){
-        console.log(event.target.value);
+
+    onInputChange(event){   
+        console.log("oninputchange" +event);
         this.setState({term:event.target.value});
+
     }
 
     onFormSubmit(event){
@@ -23,10 +28,22 @@ class SearchBar extends Component {
         this.setState({term:''});
     }
 
+ 
+   
+
     render() {
+        
+    
         return (
             <div>
-                <form onSubmit={this.onFormSubmit} className="input-group">
+                <Autocomplete
+                    style={{width: '100%'}}
+                    onPlaceSelected={(place) => {this.props.fetchCity(place.address_components);}}
+                    types={['address']}
+                    componentRestrictions={{country: "us"}}
+                 />  
+
+                {/*<form onSubmit={this.onFormSubmit} className="input-group">
                     <div className="input-field">
                         <input id="search" className="search-input" type="search" placeholder="Enter Address" 
                         value={this.state.term} onChange={this.onInputChange} validate></input>
@@ -37,7 +54,7 @@ class SearchBar extends Component {
                         <span><button type="submit" className="btn waves-effect waves-light btn-secondary">Search</button></span>
                         <span><button type="submit" className="btn waves-effect waves-light red search-button-clear">Clear</button> </span>
                     </div>
-                </form>
+                </form>*/}
             </div>
         );
     }
@@ -46,5 +63,6 @@ class SearchBar extends Component {
 function mapDispatchToProps(dispatch){
     return bindActionCreators({fetchCity},dispatch);
 }
+
 
 export default connect(null,mapDispatchToProps)(SearchBar);
