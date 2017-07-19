@@ -15,7 +15,7 @@ class AddressDetail extends Component {
 	}
 
     return(
-      <div onClick={()=>console.log(this.props.activeAddress)}>
+      <div className="address-detail" onClick={()=>console.log(this.props.activeAddress)}>
 	      <Hims/>
         <br />
 	      <Bims/>

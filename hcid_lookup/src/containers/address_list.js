@@ -30,7 +30,7 @@ class AddressList extends Component {
   render(){
     console.log(this.props.addresses);
     return(
-      <div className="flow-text">
+      <div className="flow-text address-list">
         <SearchBar />
         {this.renderList()}
       </div>

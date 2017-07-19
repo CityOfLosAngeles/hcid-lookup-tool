@@ -8,17 +8,17 @@ class App extends Component {
     render() {
         return (
             <div className="main-container">
-                <div className="row">
+                <div className="row header-row">
                     <div className="col s12">
                         <Header />
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col s4">
+                    <div className="col s3">
                         <AddressList />
                     </div>
-                    <div className="col s8">
-                        <span className=""><AddressDetail /></span>
+                    <div className="col s9">
+                        <AddressDetail />
                     </div>
                 </div>
 
