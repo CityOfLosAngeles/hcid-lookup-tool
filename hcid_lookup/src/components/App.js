@@ -7,7 +7,7 @@ import Header from './header';
 class App extends Component {
     render() {
         return (
-            <div className="container">
+            <div className="main-container">
                 <div className="row">
                     <div className="col s12">
                         <Header />
@@ -17,10 +17,11 @@ class App extends Component {
                     <div className="col s4">
                         <AddressList />
                     </div>
+                    <div className="col s8">
+                        <span className=""><AddressDetail /></span>
+                    </div>
                 </div>
-                <div className="col s8">
-                    <span className=""><AddressDetail /></span>
-                </div>
+
             </div>
         );
     }

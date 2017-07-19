@@ -13,13 +13,17 @@ class AddressDetail extends Component {
 			<div onClick={()=>console.log(this.props.activeAddress)}>Select an Address to get started</div>
 		)
 	}
-	
+
     return(
       <div onClick={()=>console.log(this.props.activeAddress)}>
 	      <Hims/>
+        <br />
 	      <Bims/>
+        <br />
 	      <Prop/>
+        <br />
 	      <Rent/>
+        <br />
 	      <Scep/>
       </div>
     );
@@ -32,4 +36,4 @@ function mapStatetoProps(state){
 	};
 }
 
-export default connect(mapStatetoProps)(AddressDetail); 
+export default connect(mapStatetoProps)(AddressDetail);

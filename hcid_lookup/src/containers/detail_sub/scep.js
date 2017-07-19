@@ -9,15 +9,15 @@ class Scep extends Component {
 				<div>
 					<h5>No Rent data on record </h5>
 				</div>
-			)	
+			)
 		}
 
 		const data = this.props.selected;
 
 		return(
-			<div className="hims_data hoverable">
+			<div className="hims_data">
 				<p className="detail-title">SCEP Data</p>
-				<table className="responsive-table striped bordered">
+				<table className="responsive-table striped centered bordered">
 					<thead>
 						<tr>
 							<th>PropID</th>
@@ -70,4 +70,4 @@ function mapStatetoProps(state){
 	};
 }
 
-export default connect(mapStatetoProps)(Scep); 
+export default connect(mapStatetoProps)(Scep);

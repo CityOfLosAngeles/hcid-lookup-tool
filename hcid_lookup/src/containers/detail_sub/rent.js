@@ -9,13 +9,13 @@ class Rent extends Component {
 				<div>
 					<h5>No Rent data on record </h5>
 				</div>
-			)	
+			)
 		}
 
 		const data = this.props.selected;
 
 		return(
-			<div className="hims_data hoverable">
+			<div className="hims_data">
 				<p className="detail-title">Rent Data</p>
 				<table className="responsive-table striped bordered">
 					<thead>
@@ -60,4 +60,4 @@ function mapStatetoProps(state){
 	};
 }
 
-export default connect(mapStatetoProps)(Rent); 
+export default connect(mapStatetoProps)(Rent);

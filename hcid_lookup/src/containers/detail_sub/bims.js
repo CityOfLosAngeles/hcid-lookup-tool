@@ -9,20 +9,20 @@ class Bims extends Component {
 					<div>
 						<h5>No BIMS data on record </h5>
 					</div>
-				)	
+				)
 			}
 
 		const data = this.props.selected;
 
 		return(
-			<div className="hims_data hoverable">
+			<div className="hims_data">
 				<p className="detail-title">BIMS Data</p>
-				<table className="responsive-table striped bordered">
+				<table className="responsive-table striped centered bordered">
 					<thead>
 					     <tr>
 					     	 <th>Property Address</th>
 					         <th>Statement Date</th>
-					         <th>APN</th>		         
+					         <th>APN</th>
 					         <th>RSO Exemptions</th>
 					         <th>SCEP Exemptions</th>
 					         <th>Total Units</th>
@@ -54,4 +54,4 @@ function mapStatetoProps(state){
 	};
 }
 
-export default connect(mapStatetoProps)(Bims); 
+export default connect(mapStatetoProps)(Bims);

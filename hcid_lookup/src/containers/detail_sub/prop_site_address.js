@@ -9,13 +9,13 @@ class PropertySiteAddress extends Component {
 					<div>
 						<h5>No Property Site Address data on record </h5>
 					</div>
-				)	
+				)
 			}
 
 		const data = this.props.selected;
 
 		return(
-			<div className="hims_data hoverable">
+			<div className="hims_data">
 				<p className="detail-title">Property Site Address Data</p>
 				<table className="responsive-table striped bordered">
 					<thead>
@@ -58,4 +58,4 @@ function mapStatetoProps(state){
 	};
 }
 
-export default connect(mapStatetoProps)(PropertySiteAddress); 
+export default connect(mapStatetoProps)(PropertySiteAddress);

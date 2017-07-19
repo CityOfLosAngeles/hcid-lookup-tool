@@ -9,13 +9,13 @@ class Hims extends Component {
 					<div>
 						<h5>No HIMS data on record </h5>
 					</div>
-				)	
+				)
 			}
 
 		const data = this.props.selected;
 
 		return(
-			<div className="hims_data hoverable">
+			<div className="hims_data">
 				<p className="detail-title">HIMS Data</p>
 				<table className="responsive-table striped bordered">
 					<thead>
@@ -62,4 +62,4 @@ function mapStatetoProps(state){
 	};
 }
 
-export default connect(mapStatetoProps)(Hims); 
+export default connect(mapStatetoProps)(Hims);
