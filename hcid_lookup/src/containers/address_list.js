@@ -21,8 +21,10 @@ class AddressList extends Component {
         key={detail.id} 
         className="list-group-item card-panel hoverable address-list-title" 
         onClick={()=>this.props.dispatch(selectAddress(detail))}>
-          {detail.street_num} {detail.street_name}, {detail.city} {detail.zipcode}
+          {detail.street_num} {detail.street_name} {detail.street_type}. 
+          <div>{detail.city}, {detail.state} {detail.zipcode}</div>
         </div>
+
       );
     });
   }

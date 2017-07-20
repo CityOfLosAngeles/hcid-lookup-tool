@@ -19,8 +19,7 @@ class AddressDetail extends Component {
 
     return(
       <div className="address-detail" onClick={()=>console.log(this.props.activeAddress)}>
-        <h4>HCIDLA Property Data 2016-2017</h4>
-
+        <h4 className="detail-title">HCIDLA Property Data 2016-2017</h4>
         <div className="prop-address-container">
           <div className="col s12">
             <span className="prop-address">Property Address: </span><br />

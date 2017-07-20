@@ -9,19 +9,18 @@ class App extends Component {
         return (
             <div className="main-container">
                 <div className="row header-row">
-                    <div className="col s12">
+                    <div className="col s12 col-fix">
                         <Header />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col s3">
+                <div className="row bottom-container">
+                    <div className="col s3 address-list-component">
                         <AddressList />
                     </div>
-                    <div className="col s9">
+                    <div className="col s9 address-detail-component">
                         <AddressDetail />
                     </div>
                 </div>
-
             </div>
         );
     }
