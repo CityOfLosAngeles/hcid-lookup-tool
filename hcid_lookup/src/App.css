@@ -1,34 +1,59 @@
-
+.col-fix {
+	padding: 0px 8px 0px 8px !important;
+}
+.header {
+	position: relative;
+	text-align: center;
+}
+.header-home-link {
+	position: absolute;
+}
+.header-city-logo {
+	height: 36px;
+}
 .header-logo {
-	height: 60px;
+	height: 36px;
+	margin-left: 10px;
 }
-
 .header-title {
-  /*font-size: 3em;*/
-  margin: 0px;
-  padding-left: 10px;
-  font-family: Helvetica, Arial,sans-serif;
-  font-weight: bold;
+	position: relative;
+	font-size: 2em;
+	margin: 0px;
+	font-family: Helvetica, Arial,sans-serif;
+	font-weight: bold;
+	color: white;
+	display: inline-block;
+	margin:0 auto;
+	height: 40px;
+	line-height: 40px;
 }
-
+.header-row {
+	padding: 5px;
+	border-bottom: 1px solid #e8e8e8;
+	margin: 0px;
+	background: #0f2940;
+}
 .address-list-title {
 	font-size: 0.70em;
 }
-
-.search-buttons {
-	text-align: right;
-	margin-bottom: 20px;
-}
-
-.search-button-clear {
-	margin-left: 10px;
-}
-
 .search-input {
 	margin-bottom: 10px !important;
 }
-
-.main-container {
-	margin-left: 10%;
-	margin-right: 10%;
+.search-icon {
+	height: 25px;
+	margin-left: 10px;
 }
+.address-list-component {
+	padding: 0px 20px 0px 20px !important;
+}
+.bottom-container {
+	margin: 0px;
+	background: #efefef;
+}
+.address-detail-component {
+	border-left: 1px solid #c1c1c1;
+}
+.detail-title {
+	text-align: center;
+}
+
