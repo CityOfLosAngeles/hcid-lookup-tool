@@ -39,16 +39,18 @@ class AddressDetail extends Component {
             </div>
           </div>
         </div>
-        <br/>
-        <Hims/>
-        <br />
-	      <Bims/>
-        <br />
-	      <Prop/>
-        <br />
-	      <Rent/>
-        <br />
-	      <Scep/>
+          <div className="row">
+            <div className="col s6"><Hims/></div>
+            <div className="col s6">
+              <Bims/>
+              <br />
+      	      <Prop/>
+              <br />
+      	      <Rent/>
+              <br />
+      	      <Scep/>
+            </div>
+          </div>
       </div>
     );
   };

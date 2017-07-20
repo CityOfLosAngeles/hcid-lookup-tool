@@ -9,3 +9,10 @@
 .responsive-table {
 	margin-bottom: 20px;
 }
+.detail-info-title {
+	font-weight: bold;
+	margin: 0px;
+}
+.detail-info {
+	font-weight: normal !important;
+}
