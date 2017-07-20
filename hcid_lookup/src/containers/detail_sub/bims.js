@@ -16,13 +16,56 @@ class Bims extends Component {
 
 		return(
 			<div className="hims_data">
+				<h3 className="detail-title">BIMS</h3>
+				<br/>
+				<p className="detail-info-title"> Property Address: 
+					<span className="detail-info">{data.Property_City_State_Zip}</span>
+				</p>
+				<p className="detail-info-title"> Statement Date: 
+					<span className="detail-info">{data.StatementDate}</span>
+				</p>
+				<p className="detail-info-title"> APN: 
+					<span className="detail-info">{data.APN}</span>
+				</p>
+				<p className="detail-info-title"> RSO Exemptions: 
+					<span className="detail-info">{data.RSO_Exemptions}</span>
+				</p>
+				<p className="detail-info-title"> SCEP Exemptions: 
+					<span className="detail-info">{data.SCEP_Exmpetions}</span>
+				</p>
+				<p className="detail-info-title"> Total Units: 
+					<span className="detail-info">{data.Total_Units}</span>
+				</p>
+				<p className="detail-info-title"> RSO Units Billed: 
+					<span className="detail-info">{data.RSO_Units_Billed}</span>
+				</p>
+				<p className="detail-info-title"> SCEP Units Billed: 
+					<span className="detail-info">{data.SCEP_Units_Billed}</span>
+				</p>
+
+			</div>
+			
+		);
+	}
+}
+
+function mapStatetoProps(state){
+	return{
+		selected : state.addresses.selected.Bims[0]
+	};
+}
+
+export default connect(mapStatetoProps)(Bims);
+
+/*
+<div className="hims_data">
 				<p className="detail-title">BIMS Data</p>
 				<table className="responsive-table striped centered bordered">
 					<thead>
 					     <tr>
 					     	 <th>Property Address</th>
 					         <th>Statement Date</th>
-					         {/* <th>APN</th> */}
+					          <th>APN</th> 
 					         <th>RSO Exemptions</th>
 					         <th>SCEP Exemptions</th>
 					         <th>Total Units</th>
@@ -37,7 +80,7 @@ class Bims extends Component {
 						<tr>
 							<td>{data.Property_Address} {data.Property_City_State_Zip}</td>
 							<td>{data.StatementDate}</td>
-							{/* <td>{data.APN}</td> */}
+							 <td>{data.APN}</td> 
 							<td>{data.RSO_Exemptions}</td>
 							<td>{data.SCEP_Exmpetions}</td>
 							<td>{data.Total_Units}</td>
@@ -46,15 +89,4 @@ class Bims extends Component {
 				    	</tr>
 					</tbody>
 				</table>
-			</div>
-		);
-	}
-}
-
-function mapStatetoProps(state){
-	return{
-		selected : state.addresses.selected.Bims[0]
-	};
-}
-
-export default connect(mapStatetoProps)(Bims);
+			</div>*/
