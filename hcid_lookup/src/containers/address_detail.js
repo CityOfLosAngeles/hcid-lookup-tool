@@ -5,6 +5,8 @@ import Bims from './detail_sub/bims';
 import Prop from './detail_sub/prop_site_address';
 import Rent from './detail_sub/rent';
 import Scep from './detail_sub/scep';
+import ReactPDF from 'react-pdf';
+
 
 class AddressDetail extends Component {
   render(){
@@ -13,10 +15,33 @@ class AddressDetail extends Component {
 			<div onClick={()=>console.log(this.props.activeAddress)}>Select an Address to get started</div>
 		)
 	}
+    const data = this.props.activeAddress;
 
     return(
       <div className="address-detail" onClick={()=>console.log(this.props.activeAddress)}>
-	      <Hims/>
+        <h4>HCIDLA Property Data 2016-2017</h4>
+
+        <div className="prop-address-container">
+          <div className="col s12">
+            <span className="prop-address">Property Address: </span><br />
+            <div className="prop-address-data">{data.street_num} {data.street_dir_cd} {data.street_name} {data.street_type}, {data.city} {data.zipcode}
+            </div>
+          </div>
+          <br/>
+          <div className="row">
+            <div className="col s4"><span className="prop-address">Council District:</span><br/>
+              <div className="prop-address-data">{data.Prop_site_addresses[0].CouncilDistrict}</div><br />
+            </div>
+            <div className="col s4"><span className="prop-address">APN: </span><br/>
+              <div className="prop-address-data">{data.Prop_site_addresses[0].Apn}</div> <br />
+            </div>
+            <div className="col s4"><span className="prop-address">Census Tract: </span><br />
+              <div className="prop-address-data">{data.Prop_site_addresses[0].CenTract2010}</div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <Hims/>
         <br />
 	      <Bims/>
         <br />

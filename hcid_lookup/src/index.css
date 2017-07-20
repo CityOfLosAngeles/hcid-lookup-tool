@@ -20,6 +20,18 @@ input[type=text]:focus {
 	width:75px;
 }
 
+.prop-address-container{
+  border-bottom: 2px solid black;
+}
+
+.prop-address{
+  font-size: 20px;
+}
+
+.prop-address-data{
+  font-size: 25px;
+}
+
 #hims_data{
 	width:30%;
 }
