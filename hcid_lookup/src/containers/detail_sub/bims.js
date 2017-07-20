@@ -22,7 +22,7 @@ class Bims extends Component {
 					     <tr>
 					     	 <th>Property Address</th>
 					         <th>Statement Date</th>
-					         <th>APN</th>
+					         {/* <th>APN</th> */}
 					         <th>RSO Exemptions</th>
 					         <th>SCEP Exemptions</th>
 					         <th>Total Units</th>
@@ -30,11 +30,14 @@ class Bims extends Component {
 					         <th>SCEP Units Billed</th>
 					     </tr>
 					</thead>
+
+
+
 					<tbody>
 						<tr>
 							<td>{data.Property_Address} {data.Property_City_State_Zip}</td>
 							<td>{data.StatementDate}</td>
-							<td>{data.APN}</td>
+							{/* <td>{data.APN}</td> */}
 							<td>{data.RSO_Exemptions}</td>
 							<td>{data.SCEP_Exmpetions}</td>
 							<td>{data.Total_Units}</td>

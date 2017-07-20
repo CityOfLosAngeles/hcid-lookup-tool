@@ -20,7 +20,7 @@ class PropertySiteAddress extends Component {
 				<table className="responsive-table striped bordered">
 					<thead>
 						<tr>
-							<th>APN</th>
+							{/* <th>APN</th> */}
 							<th>Council District</th>
 							<th>CenTract 2010</th>
 							<th>Community Name</th>
@@ -34,7 +34,7 @@ class PropertySiteAddress extends Component {
 					</thead>
 					<tbody>
 						<tr>
-							<td>{data.Apn}</td>
+							{/* <td>{data.Apn}</td> */}
 							<td>{data.CouncilDistrict}</td>
 							<td>{data.CenTract2010}</td>
 							<td>{data.CommunityName}</td>

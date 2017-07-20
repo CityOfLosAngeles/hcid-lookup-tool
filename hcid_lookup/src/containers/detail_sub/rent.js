@@ -20,7 +20,7 @@ class Rent extends Component {
 				<table className="responsive-table striped bordered">
 					<thead>
 						<tr>
-							<th>APN</th>
+							{/* <th>APN</th> */}
 							<th>Property Address</th>
 							<th>Service Date</th>
 							<th>Land Use Code</th>
@@ -35,7 +35,7 @@ class Rent extends Component {
 					</thead>
 					<tbody>
 						<tr>
-							<td>{data.APN}</td>
+							{/* <td>{data.APN}</td> */}
 							<td>{data.Property_Address}</td>
 							<td>{data.Service_Date}</td>
 							<td>{data.Land_Use_Code}</td>

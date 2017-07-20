@@ -7,7 +7,7 @@ class Scep extends Component {
 		if(!this.props.selected|| this.props.selected.length===0){
 			return(
 				<div>
-					<h5>No Rent data on record </h5>
+					<h5>No SCEP data on record </h5>
 				</div>
 			)
 		}
@@ -27,7 +27,7 @@ class Scep extends Component {
 							<th>Census Tract</th>
 							<th>Year Built</th>
 							<th>Units</th>
-							<th>APN</th>
+							{/* <th>APN</th> */}
 							<th>Land Use Description</th>
 							<th>Code District</th>
 							<th>Code District ID</th>
@@ -47,7 +47,7 @@ class Scep extends Component {
 							<td>{data.censusTract}</td>
 							<td>{data.yearBuilt}</td>
 							<td>{data.units}</td>
-							<td>{data.APN}</td>
+							{/* <td>{data.APN}</td> */}
 							<td>{data.landUseDesc}</td>
 							<td>{data.CodeDistrict}</td>
 							<td>{data.CodeDistrictID}</td>

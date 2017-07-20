@@ -28,7 +28,7 @@ class Hims extends Component {
 							<th>Project #</th>
 							<th>Status</th>
 							<th>Project Info</th>
-							<th>APN</th>
+							{/* <th>APN</th> */}
 							<th>House Frac Number</th>
 							<th>Council District</th>
 							<th>Pre Directory CD</th>
@@ -44,7 +44,7 @@ class Hims extends Component {
 							<td>{data.ProjectNo}</td>
 							<td>{data.PROJECT_STATUS}</td>
 							<td>{data.PROJECT_INFO}</td>
-							<td>{data.APN}</td>
+							{/* <td>{data.APN}</td> */}
 							<td>{data.HouseFracNum}</td>
 							<td>{data.CouncilDistrict}</td>
 							<td>{data.PreDirCd}</td>
