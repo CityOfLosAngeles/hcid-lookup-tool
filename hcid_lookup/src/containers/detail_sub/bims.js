@@ -45,7 +45,6 @@ class Bims extends Component {
 					<span className="detail-info">BIMS</span>
 				</p>
 			</div>
-			
 		);
 	}
 }

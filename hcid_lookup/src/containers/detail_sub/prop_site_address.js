@@ -15,6 +15,7 @@ class PropertySiteAddress extends Component {
 		const data = this.props.selected;
 
 		return(
+<<<<<<< HEAD
 			<div className="detail-data">
 				<h4 className="detail-datatable-title">Property Site Address</h4>
 				<p className="detail-info-title">APN: 
@@ -51,7 +52,6 @@ class PropertySiteAddress extends Component {
 					<span className="detail-info">Property Site</span>
 				</p>
 			</div>
-			
 		);
 	}
 }
