@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-class NoResponse extends React.Component {
-  render () {
-    render (
+// class NoResponse extends React.Component {
+//   render () {
+//     render (
         
-      )
-  }
-}
+//       )
+//   }
+// }
 
 
 {/*

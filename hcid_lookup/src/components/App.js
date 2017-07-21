@@ -3,6 +3,7 @@ import '../App.css';
 import AddressList from '../containers/address_list';
 import AddressDetail from '../containers/address_detail';
 import Header from './header';
+import Pagination from './pagination';
 
 class App extends Component {
     render() {
