@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {fetchCity} from '../actions/index';
 import Geosuggest from 'react-geosuggest';
 import Autocomplete from 'react-google-autocomplete';
+import Pagination from '../components/pagination';
 
 class SearchBar extends Component {
     constructor(props){
@@ -13,7 +14,7 @@ class SearchBar extends Component {
         this.onFormSubmit = this.onFormSubmit.bind(this);
         this.state = { term: ''};
     }
-    onInputChange(event){   
+    onInputChange(event){
         console.log("oninputchange" +event);
         this.setState({term:event.target.value});
 
@@ -32,11 +33,10 @@ class SearchBar extends Component {
                     onPlaceSelected={(place) => {this.props.fetchCity(place.address_components);}}
                     types={['address']}
                     componentRestrictions={{country: "us"}}
-                 />  
-
+                 />
                 {/*<form onSubmit={this.onFormSubmit} className="input-group">
                     <div className="input-field">
-                        <input id="search" className="search-input" type="search" placeholder="Enter Address" 
+                        <input id="search" className="search-input" type="search" placeholder="Enter Address"
                         value={this.state.term} onChange={this.onInputChange} validate></input>
                         <label className="label-icon" for="search"><i className="material-icons">search</i></label>
                     </div>
