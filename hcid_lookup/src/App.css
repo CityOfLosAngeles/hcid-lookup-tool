@@ -1,3 +1,6 @@
+body {
+	background: #efefef;
+}
 .col-fix {
 	padding: 0px 8px 0px 8px !important;
 }
@@ -35,6 +38,8 @@
 }
 .address-list-title {
 	font-size: 0.70em;
+	border-radius: 25px;
+	padding: 12px;
 }
 .search-input {
 	margin-bottom: 10px !important;
@@ -56,4 +61,9 @@
 .detail-title {
 	text-align: center;
 }
-
+.detail-search-text {
+	margin: 0px;
+	text-align: center;
+	font-weight: bold;
+	font-family: Helvetica, Arial,sans-serif;
+}

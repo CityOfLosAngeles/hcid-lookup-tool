@@ -26,6 +26,7 @@ class SearchBar extends Component {
     render() {
         return (
             <div>
+                <div className="detail-search-text">Search</div>
                 <Autocomplete
                     style={{width: '100%', height: '40px'}}
                     onPlaceSelected={(place) => {this.props.fetchCity(place.address_components);}}
