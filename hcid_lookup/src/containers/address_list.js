@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { selectAddress } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import SearchBar from './search_bar';
+import NoResponse from '../components/no_response';
 
 class AddressList extends Component {
   constructor(props){
@@ -11,9 +12,13 @@ class AddressList extends Component {
   }
 
   renderList = () => {
-    if(this.props.addresses.length ===0){
+    if(!this.props.addresses){
+      alert("no response from server");
       return
     }
+    else if(this.props.addresses.length ===0  ){
+        return
+       }   
     return this.props.addresses.info.map((detail) =>{
       console.log(detail);
       return(
