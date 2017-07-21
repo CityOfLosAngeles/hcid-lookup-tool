@@ -12,7 +12,10 @@ class AddressDetail extends Component {
   render(){
   	if (!this.props.activeAddress){
 		return (
-			<div onClick={()=>console.log(this.props.activeAddress)}>Select an Address to get started</div>
+			<div onClick={()=>console.log(this.props.activeAddress)}>
+        <br />
+        <div className="detail-text">Please enter an address into the search bar.</div>
+      </div>
 		)
 	}
     const data = this.props.activeAddress;
@@ -28,14 +31,20 @@ class AddressDetail extends Component {
           </div>
           <br/>
           <div className="row">
-            <div className="col s4"><span className="prop-address">Council District:</span>
-              <div className="prop-address-data">{data.Prop_site_addresses[0].CouncilDistrict}</div>
+            <div className="col s4">
+              <div className="prop-address">Council District: 
+                <span className="prop-address-data">{data.Prop_site_addresses[0].CouncilDistrict}</span>
+              </div>
             </div>
-            <div className="col s4"><span className="prop-address">APN: </span><br/>
-              <div className="prop-address-data">{data.Prop_site_addresses[0].Apn}</div>
+            <div className="col s4">
+              <div className="prop-address">APN: 
+                <span className="prop-address-data">{data.Prop_site_addresses[0].Apn}</span>
+              </div>
             </div>
-            <div className="col s4"><span className="prop-address">Census Tract: </span>
-              <div className="prop-address-data">{data.Prop_site_addresses[0].CenTract2010}</div>
+            <div className="col s4">
+              <div className="prop-address">Census Tract: 
+                <span className="prop-address-data">{data.Prop_site_addresses[0].CenTract2010}</span>
+              </div>
             </div>
           </div>
         </div>
