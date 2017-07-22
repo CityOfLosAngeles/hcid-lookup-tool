@@ -12,52 +12,46 @@ class AddressDetail extends Component {
   render(){
   	if (!this.props.activeAddress){
 		return (
-			<div onClick={()=>console.log(this.props.activeAddress)}>
-        <br />
-        <div className="detail-text">Please enter an address into the search bar.</div>
-      </div>
+			<div onClick={()=>console.log(this.props.activeAddress)}>Select an Address to get started</div>
 		)
 	}
     const data = this.props.activeAddress;
 
+
+
     return(
       <div className="address-detail" onClick={()=>console.log(this.props.activeAddress)}>
-        <h4 className="detail-title">HCIDLA Property Data 2016-2017</h4>
+        <h4>HCIDLA Property Data 2016-2017</h4>
+
         <div className="prop-address-container">
           <div className="col s12">
-            <div className="prop-address">Property Address: 
-              <span className="prop-address-data">{data.street_num} {data.street_dir_cd} {data.street_name} {data.street_type}, {data.city} {data.zipcode}</span>
+            <span className="prop-address">Property Address: </span><br />
+            <div className="prop-address-data">{data.street_num} {data.street_dir_cd} {data.street_name} {data.street_type}, {data.city} {data.zipcode}
             </div>
           </div>
           <br/>
           <div className="row">
-            <div className="col s4">
-              <div className="prop-address">Council District: 
-                <span className="prop-address-data">{data.Prop_site_addresses[0].CouncilDistrict}</span>
-              </div>
+            <div className="col s4"><span className="prop-address">Council District:</span><br/>
+              <div className="prop-address-data">{data.Prop_site_addresses[0].CouncilDistrict}</div><br />
             </div>
-            <div className="col s4">
-              <div className="prop-address">APN: 
-                <span className="prop-address-data">{data.Prop_site_addresses[0].Apn}</span>
-              </div>
+            <div className="col s4"><span className="prop-address">APN: </span><br/>
+              <div className="prop-address-data">{data.Prop_site_addresses[0].Apn}</div> <br />
             </div>
-            <div className="col s4">
-              <div className="prop-address">Census Tract: 
-                <span className="prop-address-data">{data.Prop_site_addresses[0].CenTract2010}</span>
-              </div>
+            <div className="col s4"><span className="prop-address">Census Tract: </span><br />
+              <div className="prop-address-data">{data.Prop_site_addresses[0].CenTract2010}</div>
             </div>
           </div>
         </div>
-          <div className="row">
-            <div className="col s6"><Hims/><br /><Bims/></div>
-            <div className="col s6">
-      	      <Prop/>
-              <br />
-      	      <Rent/>
-              <br />
-      	      <Scep/>
-            </div>
-          </div>
+        <br/>
+        <Hims/>
+        <br />
+	      <Bims/>
+        <br />
+	      <Prop/>
+        <br />
+	      <Rent/>
+        <br />
+	      <Scep/>
       </div>
     );
   };

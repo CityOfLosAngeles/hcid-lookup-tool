@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import {fetchCity} from '../actions/index';
 import Geosuggest from 'react-geosuggest';
 import Autocomplete from 'react-google-autocomplete';
-import Pagination from '../components/pagination';
 
 class SearchBar extends Component {
     constructor(props){
@@ -27,7 +26,6 @@ class SearchBar extends Component {
     render() {
         return (
             <div>
-                <div className="detail-search-text">Search</div>
                 <Autocomplete
                     style={{width: '100%', height: '40px'}}
                     onPlaceSelected={(place) => {this.props.fetchCity(place.address_components);}}
