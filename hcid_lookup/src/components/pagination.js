@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { _ } from 'underscore';
+import FaIconPack, {FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight} from 'react-icons/lib/fa';
+
 
 const propTypes = {
     items: PropTypes.array.isRequired,
@@ -58,7 +60,7 @@ class Pagination extends React.Component {
         currentPage = currentPage || 1;
 
         // default page size is 10
-        pageSize = pageSize || 4;
+        pageSize = pageSize || 5;
 
         // calculate total pages
         var totalPages = Math.ceil(totalItems / pageSize);
@@ -114,10 +116,10 @@ class Pagination extends React.Component {
         return (
             <ul className="pagination">
                 <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(1)}>First</a>
+                    <a onClick={() => this.setPage(1)}><FaAngleDoubleLeft /></a>
                 </li>
                 <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(pager.currentPage - 1)}>Previous</a>
+                    <a onClick={() => this.setPage(pager.currentPage - 1)}><FaAngleLeft /></a>
                 </li>
                 {pager.pages.map((page, index) =>
                     <li key={index} className={pager.currentPage === page ? 'active' : ''}>
@@ -125,10 +127,10 @@ class Pagination extends React.Component {
                     </li>
                 )}
                 <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(pager.currentPage + 1)}>Next</a>
+                    <a onClick={() => this.setPage(pager.currentPage + 1)}><FaAngleRight /></a>
                 </li>
                 <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(pager.totalPages)}>Last</a>
+                    <a onClick={() => this.setPage(pager.totalPages)}><FaAngleDoubleRight /></a>
                 </li>
             </ul>
         );
