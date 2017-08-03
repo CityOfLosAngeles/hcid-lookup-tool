@@ -60,7 +60,7 @@ class Pagination extends React.Component {
         currentPage = currentPage || 1;
 
         // default page size is 10
-        pageSize = pageSize || 5;
+        pageSize = pageSize || 8;
 
         // calculate total pages
         var totalPages = Math.ceil(totalItems / pageSize);
