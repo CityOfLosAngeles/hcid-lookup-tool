@@ -1,4 +1,5 @@
 body {
+	margin: 0;
 	background: #efefef;
 }
 .col-fix {
@@ -22,11 +23,11 @@ body {
 	position: relative;
 	font-size: 2em;
 	margin: 0px;
-	font-family: Helvetica, Arial,sans-serif;
-	font-weight: bold;
+	font-family: Helvetica, Arial, sans-serif;
+	/*font-weight: bold;*/
 	color: white;
 	display: inline-block;
-	margin:0 auto;
+	margin: 0 auto;
 	height: 40px;
 	line-height: 40px;
 }
@@ -35,7 +36,14 @@ body {
 	border-bottom: 1px solid #e8e8e8;
 	margin: 0px;
 	background: #0f2940;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
 }
+
 .address-list-title {
 	font-size: 0.70em;
 	border-radius: 25px;
@@ -48,16 +56,29 @@ body {
 	height: 25px;
 	margin-left: 10px;
 }
+
 .address-list-component {
 	padding: 0px 20px 0px 20px !important;
+	position: fixed;
+	top: 50px;
+	left: 0;
+	width: 25%;
+	height: 100%;
+	margin-left: 20px;
+	border-right: 1px solid #c1c1c1;
 }
 .bottom-container {
 	margin: 0px;
 	background: #efefef;
 }
 .address-detail-component {
-	border-left: 1px solid #c1c1c1;
+	height: 100%;
+	width: 75%;
+	overflow: auto;
+	float: right !important;
+	margin-top: 50px;
 }
+
 .detail-title {
 	text-align: center;
 }
@@ -65,5 +86,20 @@ body {
 	margin: 0px;
 	text-align: center;
 	font-weight: bold;
-	font-family: Helvetica, Arial,sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+@media screen {
+	body > .header-row {
+		position: fixed;
+	}
+	body > .address-list-component {
+		position: fixed;
+	}
+}
+
+* html body {
+	overflow: hidden;
+	height: 100%;
+	overflow: auto;
 }
