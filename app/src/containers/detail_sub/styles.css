@@ -32,3 +32,9 @@
 	font-weight: bold;
 	font-size: 1.5em;
 }
+.detail-margin-bottom-remove {
+	margin-bottom: 0px !important;
+}
+.prop-address-info {
+	font-weight: normal !important;
+}
