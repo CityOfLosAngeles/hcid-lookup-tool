@@ -14,9 +14,9 @@ UCLA Extension - The Coding Bootcamp
 
 ## Demo Videos
 
-[HCID file processing demo](http://www.youtube.com/watch?v=BHbRR9wnzD0)
-[HCID upload demo](http://www.youtube.com/watch?v=pYN1qi4-kh0)
-[HCID search demo](http://www.youtube.com/watch?v=fJ-0yVI8Ywo)
+[File processing demo](http://www.youtube.com/watch?v=BHbRR9wnzD0) |
+[Upload demo](http://www.youtube.com/watch?v=pYN1qi4-kh0) |
+[Search demo](http://www.youtube.com/watch?v=fJ-0yVI8Ywo)
 
 ## City Team
 
@@ -38,10 +38,14 @@ Neighborhood Development
 [Ryan House](https://github.com/rhouse00)
 [Matt Whitcomb](https://github.com/mwhitcom)
 
+Developed backend server that provides a response to a single query of relations of various databases.
+
 ### Phase 2
 [Ben Chang](https://github.com/benjinchang)
 [Charlotte Anongos](https://github.com/sharloteean)
 [Daniel Yeh](https://github.com/danielfyeh)
+
+Developed frontend sever using react with redux with a clean visual of the query results.
 
 ## Goals
 
@@ -77,6 +81,23 @@ Homeownership
 Other Non-City Tax Credits and Financed
 
 We've pulled these togehter into a single SQL Server database backup, called `datalake.bak`. The Database name is DataLake. 
+
+## Local Deployment Instructions
+
+There are two servers running for this application. 
+*Backend server using node & express in root folder
+*Frontend server using react in "app" folder
+
+1. Install dependencies for root and app folder
+```bash
+npm install
+```
+2. Install postgreSQL
+3. Create user for prostgres named "username"
+4. Start backend & frontend servers for root and app folder
+```bash
+npm start
+```
 
 ## Resources
 
