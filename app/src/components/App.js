@@ -5,6 +5,7 @@ import AddressDetail from '../containers/address_detail';
 import Header from './header';
 import Pagination from './pagination';
 
+//this component ties all the other components together to render in index.js
 class App extends Component {
 	render() {
 		return (

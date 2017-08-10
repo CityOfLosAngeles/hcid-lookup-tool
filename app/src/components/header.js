@@ -3,6 +3,7 @@ import '../la_logo.png';
 import '../hcid_logo.png';
 import '../search_icon.png';
 
+//header component is static and does not depend on our application state
 export default class Header extends Component {
   render() {
     return (
