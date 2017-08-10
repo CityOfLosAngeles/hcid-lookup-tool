@@ -8,6 +8,8 @@ import Scep from './detail_sub/scep';
 import ReactPDF from 'react-pdf';
 
 
+//this is the overarching component that ties all the HCID data together
+//and formats it. Please see individual sub containers in detail_sub
 class AddressDetail extends Component {
   render(){
   	if (!this.props.activeAddress){

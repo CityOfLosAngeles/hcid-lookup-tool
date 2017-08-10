@@ -3,17 +3,20 @@ const API_URL = `http://localhost:6060/query?street_num=`;
 export const FETCH_CITY = 'FETCH_CITY';
 export const ADDRESS_SELECTED = 'ADDRESS_SELECTED';
 
+
+//function to clean up JSON object we recieve from google places
+//this is important in our API call because of the way the street data
+//is formated
 function streetCleanup(string) {
 	let str = string.split(' ').shift();
 	console.log(str);
 	return str;
 }
 
+//runs our API call to our backend in order to get results for the search
 export function fetchCity(city) {
-	//const url = `${ROOT_URL}&q=${city},us`;
-	//const streetNumber = city.streetNumber;
-	//const streetName = city.streetName;
-	console.log(city);
+
+
 	// Edge case if user enters no value for search parameters
 	if (city === '' || !city || city.length <= 5) {
 		return {
@@ -54,6 +57,9 @@ export function fetchCity(city) {
 	};
 }
 
+//this is run when the user selects the address from the search results
+//and updates the application state with the selected address
+//so it will know what data to populate
 export function selectAddress(address) {
 	return {
 		type: ADDRESS_SELECTED,
