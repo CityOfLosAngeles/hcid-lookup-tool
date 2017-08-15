@@ -43,7 +43,6 @@ class SearchBar extends Component {
     }
 }
 
-
 function mapDispatchToProps(dispatch){
     return bindActionCreators({fetchCity},dispatch);
 }

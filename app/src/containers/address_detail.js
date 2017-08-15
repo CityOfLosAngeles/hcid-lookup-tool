@@ -34,7 +34,9 @@ class AddressDetail extends Component {
           </div>
           <div className="row">
             <div className="col s4">
-              <div className="prop-address">Council District: {data.Prop_site_addresses[0].CouncilDistrict}</div>
+              <div className="prop-address">Council District: 
+                <span className="prop-address-info">{data.Prop_site_addresses[0].CouncilDistrict}</span>
+              </div>
             </div>
             <div className="col s4">
               <div className="prop-address">APN: 

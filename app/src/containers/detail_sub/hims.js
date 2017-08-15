@@ -4,6 +4,7 @@ import styles from './styles.css';
 
 class Hims extends Component {
 	render(){
+			//renders when there is no data to render
 			if(!this.props.selected|| this.props.selected.length===0){
 				return(
 					<div>
@@ -65,41 +66,3 @@ function mapStatetoProps(state){
 }
 
 export default connect(mapStatetoProps)(Hims);
-
-/*
-				<table className="responsive-table striped bordered">
-					<thead>
-						<tr>
-							<th>Address</th>
-							<th>City</th>
-							<th>Zipcode</th>
-							<th>Housing Program</th>
-							<th>Project ID</th>
-							<th>Project #</th>
-							<th>Status</th>
-							<th>Project Info</th>
-							{ <th>APN</th> }
-							<th>House Frac Number</th>
-							<th>Council District</th>
-							<th>Pre Directory CD</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>{data.HouseNum} {data.StreetName} {data.StreetTypeCd}</td>
-							<td>{data.City}</td>
-							<td>{data.ZipCode}</td>
-							<td>{data.HOUSING_PROGRAM}</td>
-							<td>{data.ProjUniqueID}</td>
-							<td>{data.ProjectNo}</td>
-							<td>{data.PROJECT_STATUS}</td>
-							<td>{data.PROJECT_INFO}</td>
-							{ <td>{data.APN}</td>}
-							<td>{data.HouseFracNum}</td>
-							<td>{data.CouncilDistrict}</td>
-							<td>{data.PreDirCd}</td>
-						</tr>
-					</tbody>
-				</table>
-
-*/
