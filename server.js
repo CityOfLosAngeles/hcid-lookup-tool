@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-// *************** MULTER CONFIG ******************* // 
+// *************** MULTER CONFIG ******************* //
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads')
@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }); // PASS THE CONFIG INTO MULTER
 
 
-// ************* CSV Upload ***************** // 
+// ************* CSV Upload ***************** //
 router.get('/', (req, res) => {
     checkFolder('uploads');
     checkFolder('temp-data');
@@ -76,7 +76,9 @@ router.get('/query', (req, res) => {
         let queryResult = {
             info: result
         };
-        res.render('search', queryResult);
+        res.header("Access-Control-Allow-Origin","*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.json(queryResult);
     });
 });
 

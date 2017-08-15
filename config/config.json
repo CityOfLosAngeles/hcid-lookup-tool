@@ -1,8 +1,8 @@
 {
     "development": {
-        "username": "Andrey",
+        "username": "username",
         "password": "password",
-        "database": "hcid-db",
+        "database": "hcid_db",
         "dialect": "postgres",
         "protocol": "postgres",
         "port": 5432,
@@ -13,6 +13,10 @@
         "password": "password",
         "database": "database_test",
         "host": "127.0.0.1",
-        "dialect": "mysql"
+        "dialect": "postgres"
+    },
+    "production": {
+        "use_env_variable": "DATABASE_URL",
+        "dialect": "postgres"
     }
 }
