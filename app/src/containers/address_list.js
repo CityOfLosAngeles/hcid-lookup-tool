@@ -16,6 +16,8 @@ class AddressList extends Component {
 		this.onChangePage = this.onChangePage.bind(this);
 	}
 
+	// For edge case if no response from backend server. need to complete
+
 	// renderList = () => {
 	//   if(!this.props.addresses){
 	//     alert("no response from server");
@@ -42,25 +44,7 @@ class AddressList extends Component {
 		this.setState({ pageOfItems: pageOfItems });
 	}
 
-	// renderList = () => {
-	//   if(this.props.addresses.length ===0){
-	//     return
-	//   }
-	//   return this.props.addresses.info.map((detail) =>{
-	//     console.log(detail);
-	//     return(
-	//       <div
-	//       key={detail.id}
-	//       className="list-group-item card-panel hoverable address-list-title"
-	//       onClick={()=>this.props.dispatch(selectAddress(detail))}>
-	//         {detail.street_num} {detail.street_name} {detail.street_type}.
-	//         <div>{detail.city}, {detail.state} {detail.zipcode}</div>
-	//       </div>
-	//
-	//     );
-	//   });
-	// }
-
+	// Includes pagination which allows results to show in page format
 	render() {
 		console.log(this.props.addresses);
 		return (

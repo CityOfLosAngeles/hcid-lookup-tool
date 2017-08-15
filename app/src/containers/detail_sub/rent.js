@@ -4,6 +4,7 @@ import styles from './styles.css';
 
 class Rent extends Component {
 	render(){
+		//renders when there is no data to render
 		if(!this.props.selected|| this.props.selected.length===0){
 			return(
 				<div>
@@ -64,39 +65,3 @@ function mapStatetoProps(state){
 }
 
 export default connect(mapStatetoProps)(Rent);
-
-{/*<div className="hims_data">
-				<p className="detail-title">Rent Data</p>
-				<table className="responsive-table striped bordered">
-					<thead>
-						<tr>
-							{<th>APN</th> }
-							<th>Property Address</th>
-							<th>Service Date</th>
-							<th>Land Use Code</th>
-							<th>Unit Count</th>
-							<th>Exempted Units</th>
-							<th>RSO Units</th>
-							<th>Year Built</th>
-							<th>Category</th>
-							<th>Secondary Address</th>
-							<th>House ID</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							{ <td>{data.APN}</td> }
-							<td>{data.Property_Address}</td>
-							<td>{data.Service_Date}</td>
-							<td>{data.Land_Use_Code}</td>
-							<td>{data.Unit_Count}</td>
-							<td>{data.Exempted_Units}</td>
-							<td>{data.RSO_Units}</td>
-							<td>{data.Year_Built}</td>
-							<td>{data.Category}</td>
-							<td>{data.Secondary_Address}</td>
-							<td>{data.houseID}</td>
-				    	</tr>
-					</tbody>
-				</table>
-			</div>*/}

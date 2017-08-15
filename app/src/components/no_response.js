@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import '../App.css';
 
+// this component was inteded to display a modal for several edge case scenarios
+// Has no been completed
+
 // class NoResponse extends React.Component {
 //   render () {
 //     render (

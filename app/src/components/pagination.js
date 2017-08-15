@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { _ } from 'underscore';
 import FaIconPack, {FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight} from 'react-icons/lib/fa';
 
-
 const propTypes = {
     items: PropTypes.array.isRequired,
     onChangePage: PropTypes.func.isRequired,
