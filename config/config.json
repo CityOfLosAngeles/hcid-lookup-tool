@@ -5,7 +5,7 @@
         "database": "hcid-lookup",
         "dialect": "postgres",
         "protocol": "postgres",
-        "port": 5432,
+        "port": 5433,
         "host": "127.0.0.1"
     },
     "test": {

@@ -1,4 +1,4 @@
-#!/bin/zsh
+# !/bin/zsh
 
 DIR_NAME=$1
 
