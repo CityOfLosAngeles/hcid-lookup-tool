@@ -38,26 +38,26 @@ const upload = multer({ storage: storage }); // PASS THE CONFIG INTO MULTER
 
 
 // ************* CSV Upload ***************** //
-router.get('/', (req, res) => {
-    checkFolder('uploads');
-    checkFolder('temp-data');
-    res.redirect('/search');
-});
+// router.get('/', (req, res) => {
+//     checkFolder('uploads');
+//     checkFolder('temp-data');
+//     res.redirect('/search');
+// });
 
-router.post('/upload-data', upload.single('file'), (req, res) => {
-    watchFolder();
-    res.status(301).redirect('/upload');
-});
+// router.post('/upload-data', upload.single('file'), (req, res) => {
+//     watchFolder();
+//     res.status(301).redirect('/upload');
+// });
 
 
 // ************** Handlebars Routes ****************** //
-router.get('/search', (req, res) => {
-    res.render('search');
-});
+// router.get('/search', (req, res) => {
+//     res.render('search');
+// });
 
-router.get('/upload', (req, res) => {
-    res.render('upload');
-});
+// router.get('/upload', (req, res) => {
+//     res.render('upload');
+// });
 
 router.get('/query', (req, res) => {
     let whereStatement = {};

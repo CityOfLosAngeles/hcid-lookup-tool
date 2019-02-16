@@ -63,7 +63,7 @@ class AddressList extends Component {
 					</div>
 				)}
 				<Pagination
-					items={this.props.addresses.info}
+					// items={this.props.addresses.info}
 					onChangePage={this.onChangePage}
 				/>
 			</div>
