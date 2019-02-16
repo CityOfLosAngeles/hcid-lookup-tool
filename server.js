@@ -12,7 +12,8 @@ const app = express();
 const PORT = process.env.PORT || 6060;
 
 // Handlebars Config //
-app.use(express.static(process.cwd() + "/public"));
+// app.use(express.static(process.cwd() + "/public"));
+app.set('views', path.join(__dirname, 'views'));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
