@@ -1,4 +1,4 @@
-# HCID  - Lookup Tool 
+# HCID  - Lookup Tool (no longer used by the City of Los Angeles)
 
 ## About
 
